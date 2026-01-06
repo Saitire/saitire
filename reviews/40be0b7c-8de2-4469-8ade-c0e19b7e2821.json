@@ -1,0 +1,21 @@
+{
+  "article_id": "40be0b7c-8de2-4469-8ade-c0e19b7e2821",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin is direct grappig en prikkelt met ironie over realtime huizenmarkt",
+    "Ludieke satire op overtransparantie en stress in huizenjacht zonder kwetsbare personen te raken",
+    "Ritme is goed met korte alinea’s en luchtige toon",
+    "Escalatie naar absurde panieknotificaties en live biedingen werkt logisch en versterkt humor",
+    "Droge punchline over transparantie als onvermijdelijke feature sluit sterk af"
+  ],
+  "must_fix": [
+    "Vermijd de opsomming met kopjes (Changelog) en verwerk dit vloeiender in de tekst",
+    "Iets meer variatie in zinslengte om ritme nog speelser te maken",
+    "De anonieme makelaar quote kan iets scherper of grappiger",
+    "PanicButton-dashboard uitleg iets compacter maken",
+    "Laatste zin kan iets korter en krachtiger voor extra punch"
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2026-01-02T13:13:26.421Z"
+}

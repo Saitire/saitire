@@ -1,0 +1,21 @@
+{
+  "article_id": "68f5cc6a-040d-4b04-a07c-71f9b8058268",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin pakt direct met een beeldende setting en humoristische toon",
+    "Ludieke kritiek op bureaucratie en pensioenbeleid zonder kwetsbare personen te raken",
+    "Ritme is goed, korte alinea’s en luchtige toon",
+    "Escalatie van idee naar absurditeit (pensioen op werkvloer, bingo met dweilconcert)",
+    "Punchline is droog en onverwacht, sluit het stuk sterk af"
+  ],
+  "must_fix": [
+    "Iets meer vaart in de eerste alinea, minder beschrijvend, directer grap",
+    "Vermijd herhaling van ‘pensioen’ in korte tijd voor vloeiender lezen",
+    "Maak de overgang naar schoonmaakdienst voorstel iets scherper qua absurditeit",
+    "Kleine taalkundige aanscherping bij ‘mini-gebakjes uit de verspantry’ (verspantry is een grappige vondst, maar kan iets duidelijker)",
+    "Laat de laatste zin iets meer knallen door een subtiele twist of ironie"
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2026-01-02T10:21:02.870Z"
+}

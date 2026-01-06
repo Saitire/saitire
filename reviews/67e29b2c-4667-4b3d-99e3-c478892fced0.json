@@ -1,0 +1,21 @@
+{
+  "article_id": "67e29b2c-4667-4b3d-99e3-c478892fced0",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin is direct en beeldend met humoristische precisie",
+    "Ludieke kritiek op banken en financiële systemen, niet op mensen",
+    "Goede ritmiek met korte alinea’s en luchtige toon",
+    "Escalatie naar absurde financiële sneeuwinstrumenten voelt logisch en grappig",
+    "Droge punchline sluit het artikel sterk en onverwacht af"
+  ],
+  "must_fix": [
+    "Vermijd herhaling van 'dwarrelen' in eerste alinea",
+    "Maak de term 'sneeuwastrofee' iets duidelijker of grappiger uitgelegd",
+    "Iets meer variatie in zinslengte voor beter ritme",
+    "Verduidelijk de link tussen pensioenfondsen en winterbuffer iets scherper",
+    "Laat de laatste zin iets korter en krachtiger klinken"
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2025-12-30T15:20:25.093Z"
+}

@@ -1,0 +1,21 @@
+{
+  "article_id": "477bf180-c503-4dbf-a367-fe363139666a",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin zet meteen een droog, absurd beeld neer (regen, formulieren schuiven).",
+    "Ludieke focus op bureaucratie en absurde regels, niet op mensen.",
+    "Ritme is goed: korte alinea’s, geen opsommingen, leest vlot.",
+    "Escalatie bouwt logisch op naar steeds gekkere kruisjes en incidenten.",
+    "Punchline is droog en sluit mooi af met ‘kruisje in discussie’."
+  ],
+  "must_fix": [
+    "Iets meer variatie in zinslengte om ritme nog speelser te maken.",
+    "Kleine woordkeuze hier en daar scherper/ludieker maken (bijv. ‘juridische snelkookpan’ kan iets speelser).",
+    "De passage over DigiD en 70.000 pagina’s openen kan iets compacter.",
+    "De visser Bert Jan kan iets meer ludiekere quote krijgen.",
+    "Titel iets pakkender maken, meer humor erin."
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2026-01-02T11:19:14.221Z"
+}

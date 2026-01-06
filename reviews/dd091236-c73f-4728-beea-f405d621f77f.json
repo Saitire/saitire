@@ -1,0 +1,21 @@
+{
+  "article_id": "dd091236-c73f-4728-beea-f405d621f77f",
+  "approved": false,
+  "score": 65,
+  "reasons": [
+    "Eerste zin mist directe humor of punch",
+    "Ludiek, maar mist scherpe satire op het systeem zelf",
+    "Ritme is te langdradig, weinig witregels",
+    "Escalatie blijft te vlak, weinig absurde elementen",
+    "Punchline is te vaag en mist droge, onverwachte klap"
+  ],
+  "must_fix": [
+    "Begin met een directe, grappige zin die meteen pakt",
+    "Verkort alinea’s en voeg meer witregels toe voor beter ritme",
+    "Versterk de absurditeit van het mandaat en de maatregelen",
+    "Maak de punchline droog en onverwacht, liefst met een knipoog naar bureaucratie",
+    "Focus de satire meer op het systeem en het gedrag, niet op personen"
+  ],
+  "rewrite_prompt": "Begin met een scherpe, grappige openingszin en bouw het verhaal op met korte alinea’s die steeds absurder worden, eindigend met een droge, onverwachte punchline over het pensioenfonds en zijn ‘groei voorkomen’.",
+  "timestamp": "2026-01-02T13:48:38.667Z"
+}

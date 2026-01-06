@@ -1,0 +1,21 @@
+{
+  "article_id": "049e36ee-1f2a-490f-b695-eebb4d288bbe",
+  "approved": false,
+  "score": 68,
+  "reasons": [
+    "Eerste zin is grappig maar mist directe klap",
+    "Ludiek met systemen, maar sommige grappen voelen wat onsamenhangend",
+    "Ritme is redelijk, maar alinea's kunnen strakker en korter",
+    "Escalatie is aanwezig maar mist een scherpe, droge punchline",
+    "Laatste alinea eindigt abrupt zonder echte punch"
+  ],
+  "must_fix": [
+    "Begin met een directe, scherpe grap zonder aanloop",
+    "Maak de escalatie duidelijker en logischer binnen het universum",
+    "Verkort en splits alinea's voor beter ritme",
+    "Voeg een droge, onverwachte punchline toe aan het einde",
+    "Vermijd losse zinnen die niet bijdragen aan de flow"
+  ],
+  "rewrite_prompt": "Maak het artikel directer en scherper, met een strakker ritme en een droge, verrassende punchline aan het einde.",
+  "timestamp": "2025-12-31T15:38:33.614Z"
+}

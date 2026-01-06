@@ -1,0 +1,21 @@
+{
+  "article_id": "3c36c101-39c2-4682-8993-0cc495459207",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin zet meteen een grappige, absurde toon met 'late dienst van de receptie net iets te performatief'",
+    "Ludieke kritiek op hotelbeleid, beveiliging en kunstwereld zonder kwetsbare personen te raken",
+    "Ritme is goed met korte alinea’s en luchtige toon, geen opsommingen",
+    "Escalatie is logisch en absurd binnen het eigen universum, met juridische en kunstfilosofische lagen",
+    "Punchline in laatste alinea is droog en passend: 'Het is een gesprek.'"
+  ],
+  "must_fix": [
+    "Iets meer variatie in zinslengte om ritme nog speelser te maken",
+    "Vermijd herhaling van 'nachtelijke' in titel en eerste alinea",
+    "Kleine taalkundige schoonheidsfoutjes (bijv. 'Top 2000-publiek was net naar boven vertrokken' voelt wat onduidelijk)",
+    "De passage over verzekeraar kan iets compacter en luchtiger",
+    "De naam 'Brian King Joseph' voelt wat zwaar voor een satirisch stuk, iets speelser zou beter passen"
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2026-01-02T10:25:13.007Z"
+}

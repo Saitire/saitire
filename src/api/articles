@@ -1,0 +1,18 @@
+export async function fetchArticles() {
+  const res = await fetch('/articles.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load articles.json');
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
+}
+
+export function sortByDateDesc(items) {
+  return [...items].sort((a, b) => {
+    const da = new Date(a.created_date || 0).getTime();
+    const db = new Date(b.created_date || 0).getTime();
+    return db - da;
+  });
+}
+
+export function filterByCategory(items, category) {
+  return items.filter(a => (a.category || '').toLowerCase() === (category || '').toLowerCase());
+}

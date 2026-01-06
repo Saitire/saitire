@@ -1,0 +1,21 @@
+{
+  "article_id": "cf67e6c4-026c-4477-a8bb-b85d89462174",
+  "approved": false,
+  "score": 68,
+  "reasons": [
+    "Eerste zin mist directe humor, voelt als aanloop",
+    "Humor is subtiel maar mist scherpe ludieke punch op systemen",
+    "Ritme is redelijk, maar alinea’s zijn soms te lang en vol",
+    "Escalatie blijft te mild, mist echt absurde wendingen",
+    "Punchline is te vaag en niet droog of abrupt genoeg"
+  ],
+  "must_fix": [
+    "Begin met een directe grap of absurde situatie",
+    "Versterk de satire op algoritmes en streaminggedrag",
+    "Maak alinea’s korter en krachtiger",
+    "Laat de absurditeit geleidelijk sterker worden, bv. steeds gekkere playbackopties",
+    "Sluit af met een droge, onverwachte punchline die het absurde universum bevestigt"
+  ],
+  "rewrite_prompt": "Begin met een scherpe, grappige openingszin die meteen de absurditeit van Netflix-algoritmes en stemmen benadrukt. Verdeel de tekst in korte, ritmische alinea’s en bouw de gekte op met steeds absurdere features of situaties. Sluit af met een droge, onverwachte punchline die het verhaal op een ludieke manier afrondt.",
+  "timestamp": "2026-01-02T09:59:48.888Z"
+}

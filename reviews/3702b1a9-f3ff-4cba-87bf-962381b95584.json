@@ -1,0 +1,21 @@
+{
+  "article_id": "3702b1a9-f3ff-4cba-87bf-962381b95584",
+  "approved": false,
+  "score": 65,
+  "reasons": [
+    "Eerste zin mist directe humor of punch",
+    "Ludiek, maar mist scherpe satire op het systeem",
+    "Ritme is oké, maar alinea's zijn te lang en vlak",
+    "Escalatie blijft te braaf, mist absurditeit",
+    "Punchline is te mild en mist droge klap"
+  ],
+  "must_fix": [
+    "Begin met een directe grappige zin die meteen pakt",
+    "Versterk de satire op parkeerbeleid en bureaucratie",
+    "Maak alinea's korter en ritmischer",
+    "Laat de situatie steeds absurder escaleren (bijv. tourbus wordt als 'gevaarlijk voertuig' behandeld)",
+    "Sluit af met een droge, onverwachte punchline"
+  ],
+  "rewrite_prompt": "Maak het artikel directer en grappiger vanaf de eerste zin, bouw de absurditeit van het parkeerincident steeds verder op en sluit af met een droge, onverwachte punchline.",
+  "timestamp": "2026-01-02T13:14:14.364Z"
+}

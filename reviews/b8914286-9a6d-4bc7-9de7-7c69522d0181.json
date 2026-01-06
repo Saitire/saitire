@@ -1,0 +1,21 @@
+{
+  "article_id": "b8914286-9a6d-4bc7-9de7-7c69522d0181",
+  "approved": true,
+  "score": 82,
+  "reasons": [
+    "Eerste zin pakt direct met een absurde maatregel rondom Yorick van Norden",
+    "Ludieke satire op bureaucratie en overmatige controle in poppodia",
+    "Ritme is vlot met korte alinea’s en voldoende witregels",
+    "Escalatie naar live dashboards, bezwaarprocedures en DigiD-loket is logisch en grappig",
+    "Droge punchline over landelijke verplichting sluit het stuk sterk af"
+  ],
+  "must_fix": [
+    "Iets meer variatie in zinslengte om ritme nog speelser te maken",
+    "Vermijd herhaling van 'VAR-check' in korte tijd",
+    "Kleine taalkundige schoonheidsfoutjes (bijv. 'het is dinsdagavond' voelt wat losstaand)",
+    "Maak de punchline iets scherper door het abrupt te laten eindigen zonder uitweiding",
+    "Overweeg iets meer ironie in de quote van de vaste bezoeker"
+  ],
+  "rewrite_prompt": "",
+  "timestamp": "2026-01-02T13:49:46.994Z"
+}
