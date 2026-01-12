@@ -1,0 +1,98 @@
+name: Publish SAITIRE
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Aantal artikelen"
+        required: false
+        default: "3"
+      news_per_trend:
+        description: "Nieuwsitems per trend"
+        required: false
+        default: "3"
+      force:
+        description: "Force (true/false)"
+        required: false
+        default: "false"
+      dry_run:
+        description: "Dry run (true/false)"
+        required: false
+        default: "false"
+
+  schedule:
+    # Elke dag 07:30, 12:00, 18:00 NL-tijd (CET/CEST is lastig in GitHub; dit is UTC)
+    # Pas dit aan zodra je het precies wilt. (CET=UTC+1, CEST=UTC+2)
+    - cron: "30 6 * * *"
+    - cron: "0 11 * * *"
+    - cron: "0 17 * * *"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Run publisher
+        env:
+          # Keys (zet je straks als GitHub Secrets)
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # jouw defaults (kun je later tweaken)
+          WRITE_MODEL: ${{ secrets.WRITE_MODEL }}
+          CLASSIFY_MODEL: ${{ secrets.CLASSIFY_MODEL }}
+          FILTER_MODEL: ${{ secrets.FILTER_MODEL }}
+          WRITE_TEMPERATURE: ${{ secrets.WRITE_TEMPERATURE }}
+
+          # Images
+          IMAGE_MODE: ${{ secrets.IMAGE_MODE }}
+
+          # Review flags (als je wilt)
+          HUMAN_REVIEW_MODE: ${{ secrets.HUMAN_REVIEW_MODE }}
+          FORCE_ALL_TO_PENDING: ${{ secrets.FORCE_ALL_TO_PENDING }}
+          HUMAN_REVIEW_SCORE_BELOW: ${{ secrets.HUMAN_REVIEW_SCORE_BELOW }}
+
+        run: |
+          LIMIT="${{ github.event.inputs.limit }}"
+          NEWS_PER_TREND="${{ github.event.inputs.news_per_trend }}"
+          FORCE="${{ github.event.inputs.force }}"
+          DRY="${{ github.event.inputs.dry_run }}"
+
+          if [ -z "$LIMIT" ]; then LIMIT="3"; fi
+          if [ -z "$NEWS_PER_TREND" ]; then NEWS_PER_TREND="3"; fi
+          if [ -z "$FORCE" ]; then FORCE="false"; fi
+          if [ -z "$DRY" ]; then DRY="false"; fi
+
+          ARGS="--limit $LIMIT --news_per_trend $NEWS_PER_TREND"
+          if [ "$FORCE" = "true" ]; then ARGS="$ARGS --force"; fi
+          if [ "$DRY" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+
+          echo "Running: node scripts/publish.js $ARGS"
+          node scripts/publish.js $ARGS
+
+      - name: Commit & push updated articles.json
+        run: |
+          git config user.name "saitire-bot"
+          git config user.email "saitire-bot@users.noreply.github.com"
+
+          git add public/articles.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: publish new articles"
+          git push
