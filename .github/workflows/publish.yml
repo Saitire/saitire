@@ -49,20 +49,20 @@ jobs:
           # Keys (zet je straks als GitHub Secrets)
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-
-          # jouw defaults (kun je later tweaken)
-          WRITE_MODEL: ${{ secrets.WRITE_MODEL }}
-          CLASSIFY_MODEL: ${{ secrets.CLASSIFY_MODEL }}
-          FILTER_MODEL: ${{ secrets.FILTER_MODEL }}
-          WRITE_TEMPERATURE: ${{ secrets.WRITE_TEMPERATURE }}
-
-          # Images
-          IMAGE_MODE: ${{ secrets.IMAGE_MODE }}
-
-          # Review flags (als je wilt)
-          HUMAN_REVIEW_MODE: ${{ secrets.HUMAN_REVIEW_MODE }}
-          FORCE_ALL_TO_PENDING: ${{ secrets.FORCE_ALL_TO_PENDING }}
-          HUMAN_REVIEW_SCORE_BELOW: ${{ secrets.HUMAN_REVIEW_SCORE_BELOW }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+        
+          CLAUDE_WRITE_MODEL: claude-sonnet-4-20250514
+        
+          WRITE_MODEL: gpt-4.1
+          CLASSIFY_MODEL: gpt-4.1-mini
+          FILTER_MODEL: gpt-4.1-mini
+          WRITE_TEMPERATURE: "0.90"
+        
+          IMAGE_MODE: gen
+        
+          HUMAN_REVIEW_MODE: "1"
+          FORCE_ALL_TO_PENDING: "1"
+          HUMAN_REVIEW_SCORE_BELOW: "85"
 
         run: |
           LIMIT="${{ github.event.inputs.limit }}"
