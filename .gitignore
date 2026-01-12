@@ -44,6 +44,7 @@ public/tmp/
 .env
 
 # editors fotos (wel committen)
+public/images/
 !public/images/
 !public/images/editors/
 !public/images/editors/*.png
