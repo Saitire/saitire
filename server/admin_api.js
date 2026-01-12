@@ -203,6 +203,64 @@ app.post("/api/reject", auth, (req, res) => {
   res.json({ ok: true });
 });
 
+// -------------------- FEEDBACK (publiek) --------------------
+
+app.post("/api/feedback", (req, res) => {
+  const { type, title, url, message, email, page_url, user_agent } = req.body || {};
+
+  if (!message || String(message).trim().length < 3) {
+    return res.status(400).json({ error: "Missing message" });
+  }
+
+  const entry = {
+    id: crypto.randomUUID(),
+    created_at: new Date().toISOString(),
+    type: clampText(type || "anders", 40) || "anders",
+    title: clampText(title, 140),
+    url: clampText(url, 600),
+    message: clampText(message, 4000),
+    email: clampText(email, 120),
+    page_url: clampText(page_url, 600),
+    user_agent: clampText(user_agent, 300),
+    resolved: false,
+  };
+
+  const FEEDBACK_INBOX = path.join(ROOT, "reviews", "site_feedback.jsonl");
+  appendJsonl(FEEDBACK_INBOX, entry);
+
+  res.json({ ok: true, id: entry.id });
+});
+
+// GET /api/feedback (admin)
+app.get("/api/feedback", auth, (_req, res) => {
+  const p = path.join(ROOT, "reviews", "site_feedback.jsonl");
+  if (!fs.existsSync(p)) return res.json({ feedback: [] });
+
+  const lines = fs
+    .readFileSync(p, "utf8")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const items = [];
+  for (const line of lines) {
+    try {
+      items.push(JSON.parse(line));
+    } catch {
+      // skip corrupte regel
+    }
+  }
+
+  // newest first
+  items.sort((a, b) => {
+    const da = a?.created_at ? new Date(a.created_at).getTime() : 0;
+    const db = b?.created_at ? new Date(b.created_at).getTime() : 0;
+    return db - da;
+  });
+
+  res.json({ feedback: items });
+});
+
 //
 // -------------------- COMMENTS (publiek) --------------------
 //

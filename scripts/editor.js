@@ -1,26 +1,17 @@
-/**
- * scripts/editor.js
- *
- * Eindredacteur / hoofdredacteur:
- * - Hard reject ALLEEN als bronkop/titel/subtitle duidelijke ernstige signalen bevatten
- *   (geen body/content check -> voorkomt dat satire-woorden per ongeluk alles blokkeren)
- * - Daarna AI-kwaliteitsreview (grappig, ludiek, ritme, punchline)
- * - Schrijft review JSON naar /reviews/<article_id>.json
- *
- * Vereist:
- * - npm i openai dotenv
- * - .env met OPENAI_API_KEY=...
- */
-
+// scripts/editor.js
 import "dotenv/config";
 import fs from "node:fs/promises";
 import path from "node:path";
 import OpenAI from "openai";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 const REVIEW_DIR = path.join(process.cwd(), "reviews");
-const REVIEW_MODEL = "gpt-4.1-mini"; // voor kwaliteit; je kunt dit later naar "gpt-4.1" zetten
+const REVIEW_MODEL = "gpt-4.1-mini";
+
+function getOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw new Error("OPENAI_API_KEY ontbreekt (review kan niet draaien zonder key).");
+  return new OpenAI({ apiKey });
+}
 
 function formatReviewId(article) {
   return article.id || article.slug || String(Date.now());
@@ -46,11 +37,6 @@ function extractJson(text) {
   return JSON.parse(cleaned);
 }
 
-/**
- * Strakke "ernstig"-detectie voor koppen:
- * Alleen duidelijke, expliciete patronen (woordgrenzen) -> veel minder false positives.
- * Dit gebruik je op source_headline + title + subtitle.
- */
 function isSeriousTopicTitle(text) {
   const t = String(text || "").toLowerCase();
 
@@ -83,16 +69,16 @@ function isSeriousTopicTitle(text) {
 }
 
 function hasSeriousSignalsInHeadlines(article) {
-  // ✅ alleen kop/metadata; NIET body/content
   const source = String(article?.source_headline || "");
   const title = String(article?.title || "");
   const subtitle = String(article?.subtitle || "");
-
   const combo = `${source} | ${title} | ${subtitle}`.trim();
   return isSeriousTopicTitle(combo);
 }
 
 async function aiQualityReview(article) {
+  const openai = getOpenAI();
+
   const sourceHeadline = String(article.source_headline || "");
   const title = String(article.title || "");
   const subtitle = String(article.subtitle || "");
@@ -163,7 +149,6 @@ Output: ALLEEN geldige JSON exact in dit schema:
 }
 
 export async function reviewArticle(article) {
-  // 1) Hard reject op duidelijke ernstige signalen in bronkop/titel/subtitle
   if (hasSeriousSignalsInHeadlines(article)) {
     const review = {
       article_id: formatReviewId(article),
@@ -187,7 +172,6 @@ export async function reviewArticle(article) {
     return review;
   }
 
-  // 2) AI kwaliteitsreview
   const result = await aiQualityReview(article);
 
   const review = {

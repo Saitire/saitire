@@ -43,7 +43,6 @@ export default function ArticlePage() {
 
     const sameCat = articles
       .filter((a) => a.slug !== article.slug)
-      .filter((a) => !a.is_short_news)
       .filter((a) => a.category === article.category)
       .slice(0, 6);
 
@@ -51,7 +50,6 @@ export default function ArticlePage() {
 
     const filler = articles
       .filter((a) => a.slug !== article.slug)
-      .filter((a) => !a.is_short_news)
       .filter((a) => a.category !== article.category)
       .slice(0, 4 - sameCat.length);
 

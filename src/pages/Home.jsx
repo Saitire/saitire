@@ -23,10 +23,10 @@ export default function Home() {
     [articles]
   );
 
-// main feed: alles behalve short (featured mogen óók in de lijst)
-    const main = useMemo(() => {
-      return articles.filter(a => !isShort(a));
-    }, [articles]);
+  // main feed: alles behalve short (featured mogen óók in de lijst)
+  const main = useMemo(() => {
+    return articles.filter(a => !isShort(a));
+  }, [articles]);
 
   const [idx, setIdx] = useState(0);
 
@@ -99,7 +99,7 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+                <div className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm min-h-[360px] md:min-h-[380px]">
                   {/* hero image (subtiel) */}
                   {heroImg ? (
                     <>
@@ -107,11 +107,11 @@ export default function Home() {
                         <img
                           src={heroImg}
                           alt=""
-                          className="h-full w-full object-cover opacity-[0.12]"
+                          className="h-full w-full object-cover opacity-[0.80]"
                           loading="lazy"
                         />
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/80 to-slate-50/90" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/65 via-white/60 to-slate-50/60" />
                     </>
                   ) : (
                     <>
@@ -121,8 +121,8 @@ export default function Home() {
                     </>
                   )}
 
-                  <div className="relative p-6 md:p-10">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                  <div className="relative p-6 md:p-10 h-full">
+                    <div className="flex flex-col md:flex-row md:items-stretch md:justify-between gap-6 h-full">
                       <div className="max-w-3xl">
                         <div className="flex items-center gap-2 text-xs font-semibold">
                           {current?.category && (
@@ -135,7 +135,7 @@ export default function Home() {
 
                         <div className="mt-4">
                           <Link to={`/artikel/${current.slug}`} className="group inline-block">
-                            <h3 className="text-2xl md:text-4xl font-black text-slate-900 leading-tight group-hover:underline decoration-[#f26522] decoration-4 underline-offset-4 transition">
+                            <h3 className="text-2xl md:text-4xl font-black text-slate-900 leading-tight group-hover:underline decoration-[#f26522] decoration-4 underline-offset-4 transition line-clamp-3">
                               {current.title}
                             </h3>
                           </Link>
@@ -165,14 +165,14 @@ export default function Home() {
                         {/* bron (subtiel, alleen als aanwezig) */}
                         {current?.image?.source_page_url && (
                           <div className="mt-4 text-xs text-slate-500">
-                            Beeld:{" "}
+                            Beeld:{' '}
                             <a
                               href={current.image.source_page_url}
                               target="_blank"
                               rel="noreferrer"
                               className="underline decoration-slate-300 hover:decoration-slate-500"
                             >
-                              {current.image.license?.short ? `Wikimedia (${current.image.license.short})` : "Wikimedia"}
+                              {current.image.license?.short ? `Wikimedia (${current.image.license.short})` : 'Wikimedia'}
                             </a>
                           </div>
                         )}
@@ -236,14 +236,15 @@ export default function Home() {
                         to={`/artikel/${a.slug}`}
                         className="group bg-white rounded-2xl border border-slate-100 hover:shadow-md transition overflow-hidden"
                       >
-                        <div className="p-6">
-                          <div className="flex items-start gap-4">
+                        <div className="p-5">
+                          <div className="flex flex-col gap-4">
                             {thumb ? (
                               <img
                                 src={thumb}
                                 alt=""
                                 loading="lazy"
-                                className="h-14 w-14 rounded-2xl object-cover border border-slate-200 bg-slate-50 shrink-0"
+                                className="h-48 w-full rounded-xl object-cover border border-slate-200 bg-slate-50 shrink-0 transition-transform duration-200 group-hover:scale-[1.05]"
+                                
                               />
                             ) : (
                               <div className="h-14 w-14 rounded-2xl border border-slate-200 bg-slate-50 shrink-0 flex items-center justify-center">
@@ -263,7 +264,7 @@ export default function Home() {
 
                         <div className="h-px bg-slate-100" />
 
-                        <div className="px-6 py-3 text-xs text-slate-500 flex items-center justify-between">
+                        <div className="px-5 py-3 text-xs text-slate-500 flex items-center justify-between">
                           <span>{formatDate(a.created_date || a.date || a.published_at || a.publishedAt)}</span>
                           <span className="font-semibold text-slate-700">Lees →</span>
                         </div>
@@ -298,4 +299,3 @@ function formatDate(value) {
   if (Number.isNaN(d.getTime())) return '';
   return d.toLocaleDateString('nl-NL', { day: '2-digit', month: 'long', year: 'numeric' });
 }
-

@@ -3,6 +3,9 @@ import { safeExtractJson } from "./json.js";
 import { cleanText, fallbackTitle } from "./text.js";
 import { writeText } from "./llmWrite.js";
 
+// ✅ ENIGE IMAGE-PAD: Replicate SDXL Turbo generator
+import { generateImage } from "../generateImage.js";
+
 /**
  * Overkoepelende redactionele regels (voor alle schrijfprompts)
  */
@@ -618,7 +621,7 @@ const WRITERS_ROOM = [
 ];
 
 export async function writersRoomNotesAI(ctx, { title, subtitle, content, article_type, topic_mode }) {
-  const reviewers = [WRITERS_ROOM[0], WRITERS_ROOM[1], WRITERS_ROOM[2]];
+  const reviewers = [WRITERS_ROOM[0], WRITERS_ROOM[1]];
   const notes = [];
 
   for (const r of reviewers) {
@@ -669,8 +672,6 @@ Geen extra tekst.
 }
 
 export async function punchUpRewriteAI(ctx, args) {
-  // Laat dit voorlopig OpenAI blijven (stabieler voor JSON), zeker nu investigation chunking al veel doet.
-  // Je kunt dit later ook chunked maken als je wil.
   const {
     trend,
     newsTitle,
@@ -697,7 +698,7 @@ export async function punchUpRewriteAI(ctx, args) {
       : "";
 
   const feedbackBlock = feedbackContext?.trim()
-    ? `REDACTIE-FEEDBACK OM TOE TE PASSEN:
+    ? `REDACTIE-FEEDBACK OM TOE TE PASSASSEN:
 ${feedbackContext.trim()}
 `
     : "";
@@ -791,7 +792,7 @@ TABOES (hard blokkeren):
 ${taboos.length ? `- ${taboos.join("\n- ")}` : "- Geen privépersonen, geen slachtoffers, geen haat."}
 
 DOEL:
-- Maak het strakker en leesbaarder (niet ‘drukker’)
+- Maak het strakker en leesbaarder (niet ‘drukger’)
 - Snijd verklarende zinnen weg die de grap uitleggen
 - Check dat elke alinea de satirische premisse dient
 - Upgrade de laatste zin: droog, procedureel, moreel leeg, volledig in de context, laat het terugpakken op de strekking van het artikel
@@ -832,4 +833,31 @@ Geen extra tekst.
     subtitle: cleanText(data.subtitle || subtitle),
     content_markdown: String(data.content_markdown || content).trim(),
   };
+}
+
+// -------------------- IMAGES (ENIGE MANIER) --------------------
+
+export async function generateArticleImage({
+  slug,
+  title,
+  subtitle,
+  trend,
+  category,
+  force = false,
+}) {
+  // We "verzinnen" niets nieuws: we gebruiken alleen bestaande velden
+  // (title/subtitle/trend/category) om generateImage.js te voeden.
+  const summary = cleanText(subtitle || trend || "");
+
+  const result = await generateImage({
+    slug,
+    title: cleanText(title || ""),
+    summary,
+    category: cleanText(category || ""),
+    force,
+    steps: 4,
+  });
+
+  // result: { url, cached, prompt }
+  return result;
 }

@@ -28,10 +28,11 @@ export default function CategoryPage() {
     queryFn: async () => sortByDateDesc(await fetchArticles()),
   });
 
-  const items = useMemo(() => {
-    if (!category) return [];
-    return filterByCategory(articles, category).filter((a) => !a.is_short_news);
-  }, [articles, category]);
+const items = useMemo(() => {
+  if (!category) return [];
+  return filterByCategory(articles, category)
+    .filter((a) => a?.review_status !== "needs_human"); // alleen gepubliceerd
+}, [articles, category]);
 
   if (!category || !isValidCategory(category)) {
     return (
@@ -83,17 +84,17 @@ export default function CategoryPage() {
                         to={`/artikel/${a.slug}`}
                         className="group bg-white rounded-2xl border border-slate-100 hover:shadow-md transition overflow-hidden"
                       >
-                        <div className="p-6">
-                          <div className="flex items-start gap-4">
+                        <div className="p-5">
+                          <div className="flex flex-col gap-4">
                             {thumb ? (
                               <img
                                 src={thumb}
                                 alt=""
                                 loading="lazy"
-                                className="h-14 w-14 rounded-2xl object-cover border border-slate-200 bg-slate-50 shrink-0"
+                                className="h-48 w-full rounded-xl object-cover border border-slate-200 bg-slate-50 shrink-0 transition-transform duration-200 group-hover:scale-[1.05]"
                               />
                             ) : (
-                              <div className="h-14 w-14 rounded-2xl border border-slate-200 bg-slate-50 shrink-0 flex items-center justify-center">
+                              <div className="h-28 w-40 rounded-xl border border-slate-200 bg-slate-50 shrink-0 flex items-center justify-center">
                                 <div className="h-2.5 w-2.5 rounded-full bg-[#f26522]" />
                               </div>
                             )}
@@ -123,7 +124,7 @@ export default function CategoryPage() {
 
                         <div className="h-px bg-slate-100" />
 
-                        <div className="px-6 py-3 text-xs text-slate-500 flex items-center justify-between">
+                        <div className="px-5 py-3 text-xs text-slate-500 flex items-center justify-between">
                           <span>{a.author ? `Door ${a.author}` : ""}</span>
                           <span className="font-semibold text-slate-700">Lees →</span>
                         </div>

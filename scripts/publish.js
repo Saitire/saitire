@@ -4,8 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import OpenAI from "openai";
 
-import editors from "./editors.json" with { type: "json" };
-import { reviewArticle } from "./editor.js";
+import editors from "../src/data/editors.json" with { type: "json" };
 
 import {
   parseArgs,
@@ -26,7 +25,6 @@ import {
   extractReadableTextFromHtml,
   normalizeParagraphs,
   normalizeInvestigationMarkdown,
-  trimToMaxWordsPreserveParagraphs,
   removeAuthorSignature,
 } from "./lib/text.js";
 
@@ -61,7 +59,7 @@ const FILTER_MODEL = process.env.FILTER_MODEL || "gpt-4.1-mini";
 const WRITE_TEMPERATURE = toNumber(process.env.WRITE_TEMPERATURE, 0.9);
 
 // Volume
-const LIMIT_DEFAULT = 1;
+const LIMIT_DEFAULT = 3;
 const NEWS_PER_TREND_DEFAULT = 3;
 
 // Human review (default: everything goes to pending)
@@ -87,15 +85,11 @@ const NEWS_RSS = (q) =>
 const MAX_FEATURED = 4;
 const FEATURED_TTL_HOURS = 12;
 const FEATURED_CATEGORIES = ["politiek", "tech", "buitenland"];
-const FEATURED_EDITOR_ID = "anchor";
 
 // Modes/types
 const TOPIC_MODE_WEIGHTS = { trending: 0.7, societal_pulse: 0.3 };
 const ARTICLE_TYPE_WEIGHTS = { normal: 0.5, short: 0.5, investigation: 0.08 };
 const MAX_INVESTIGATIONS_PER_DAY = 1;
-
-// Word limits by type
-const MAX_WORDS_BY_TYPE = { normal: 260, short: 120, investigation: 1800 };
 
 // Source summary
 const SOURCE_SUMMARY_MAX_BULLETS = 4;
@@ -119,7 +113,18 @@ const LIMIT = toInt(args.limit, LIMIT_DEFAULT);
 const NEWS_PER_TREND = toInt(args.news_per_trend, NEWS_PER_TREND_DEFAULT);
 const FORCE_INVESTIGATION = !!args.investigation;
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// ✅ toggles
+const SKIP_REVIEW = !!args["no-review"] || (process.env.ENABLE_REVIEW ?? "1") === "0";
+const NO_OPENAI = !!args["no-openai"] || (process.env.ENABLE_OPENAI ?? "1") === "0";
+
+// ✅ OpenAI is required for writing pipeline; we only allow NO_OPENAI in DRY_RUN
+const needsOpenAIForWork = !NO_OPENAI && !!process.env.OPENAI_API_KEY;
+if (!NO_OPENAI && !process.env.OPENAI_API_KEY) {
+  // we still fail early, but only here (not in editor.js import time)
+  throw new Error("OPENAI_API_KEY ontbreekt. Zet deze in je .env of draai met --dry-run --no-openai.");
+}
+
+const openai = NO_OPENAI ? null : new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const aiCtx = {
   openai,
@@ -145,6 +150,8 @@ async function main() {
   console.log("Force:", FORCE ? "ON" : "OFF");
   console.log("Force investigation:", FORCE_INVESTIGATION ? "ON" : "OFF");
   console.log("Images:", IMAGE_MODE);
+  console.log("OpenAI:", NO_OPENAI ? "OFF" : "ON");
+  console.log("Review:", SKIP_REVIEW ? "SKIP (--no-review / ENABLE_REVIEW=0)" : "ON");
   console.log(
     "Human review:",
     HUMAN_REVIEW_MODE
@@ -155,7 +162,10 @@ async function main() {
   );
   console.log("");
 
-  if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY ontbreekt.");
+  // ✅ allow "no-openai" only for dry-run (so you can test RSS, parsing, flow)
+  if (NO_OPENAI && !DRY_RUN) {
+    throw new Error("OPENAI staat uit. Draai met --dry-run --no-openai, of zet ENABLE_OPENAI=1 + OPENAI_API_KEY.");
+  }
 
   const existing = readJsonArray(OUT_PATH);
   const existingSlugs = new Set(existing.map((a) => a.slug).filter(Boolean));
@@ -176,8 +186,24 @@ async function main() {
 
   console.log("Trends gevonden:", trends.length);
 
+  // If no-openai dry-run: just show trends and exit
+  if (NO_OPENAI && DRY_RUN) {
+    console.log("\nDRY-RUN (no-openai): trends preview:");
+    trends.slice(0, LIMIT).forEach((t, i) => console.log(`${i + 1}. ${t}`));
+    return;
+  }
+
   const newArticles = []; // only published articles end up here
   let writtenCount = 0; // pending OR published counts toward limit
+
+  // ✅ lazy import for review (prevents editor.js OpenAI init when skipping)
+  let reviewArticleFn = null;
+  async function getReviewArticle() {
+    if (reviewArticleFn) return reviewArticleFn;
+    const mod = await import("./editor.js");
+    reviewArticleFn = mod.reviewArticle;
+    return reviewArticleFn;
+  }
 
   for (const trend of trends) {
     if (writtenCount >= LIMIT) break;
@@ -326,7 +352,7 @@ async function main() {
       continue;
     }
 
-    // normalize + trim + remove signature
+    // normalize + remove signature
     const content = finalizeContent(finalDraft.content_markdown, article_type);
 
     // actualiteit-check (alleen bij trending)
@@ -366,10 +392,8 @@ async function main() {
           await notifyReviewNeeded({ title, score: 0, reason: "Actualiteit-check" });
         }
 
-        // ✅ telt mee als "geschreven" (ook in DRY_RUN)
         writtenCount++;
         if (writtenCount >= LIMIT) break;
-
         continue;
       }
     }
@@ -388,12 +412,10 @@ async function main() {
       continue;
     }
 
-    // featured candidate
+    // featured candidate (nu: alle editors kunnen candidate zijn)
     const isShortNews = article_type === "short";
     const featuredCandidate =
-      !isShortNews &&
-      FEATURED_CATEGORIES.includes(category) &&
-      editor.id === FEATURED_EDITOR_ID;
+      FEATURED_CATEGORIES.includes(category);
 
     // article object
     const article = makeArticle({
@@ -420,26 +442,7 @@ async function main() {
           slug,
         },
         { mode: IMAGE_MODE, widths: IMAGE_WIDTHS }
-        ).catch((e) => {
-          console.log("  Image error message:", e?.message || String(e));
-          console.log("  Image error name:", e?.name);
-          console.log("  Image error status:", e?.status);
-          console.log("  Image error code:", e?.code);
-
-          // OpenAI SDK stopt vaak details hier:
-          if (e?.error) console.log("  Image error.error:", e.error);
-
-          // Soms zit het in cause
-          if (e?.cause) console.log("  Image error.cause:", e.cause);
-
-          // Laat de eerste 2 stackregels zien (genoeg)
-          if (e?.stack) console.log("  Image error stack:", String(e.stack).split("\n").slice(0, 3).join("\n"));
-
-          // Laat alle keys zien zodat we weten waar details zitten
-          console.log("  Image error keys:", Object.keys(e || {}));
-
-          return null;
-        });
+      ).catch(() => null);
 
       if (img?.urls?.original) {
         attachImage(article, img);
@@ -450,7 +453,13 @@ async function main() {
     }
 
     // AI-eindredacteur (quality gate)
-    const review = await reviewArticle({ ...article, body: article.content });
+    let review;
+    if (SKIP_REVIEW) {
+      review = { approved: true, score: 100, reasons: [], article_id: article.id };
+    } else {
+      const reviewArticle = await getReviewArticle();
+      review = await reviewArticle({ ...article, body: article.content });
+    }
 
     article.review_status = review.approved ? "approved" : "rejected";
     article.review_score = review.score;
@@ -473,14 +482,11 @@ async function main() {
         await notifyReviewNeeded({ title: article.title, score: review.score, reason: "Pending review" });
       }
 
-      // ✅ telt mee als "geschreven" (ook in DRY_RUN)
       writtenCount++;
       if (writtenCount >= LIMIT) break;
-
       continue;
     }
 
-    // If review mode off + not forced: publish
     console.log(`  ✅ AI APPROVED (score ${review.score})`);
     newArticles.push(article);
     allForQuota.unshift(article);
@@ -490,7 +496,6 @@ async function main() {
     if (writtenCount >= LIMIT) break;
   }
 
-  // --- DRY-RUN output always happens (even if 0) ---
   if (DRY_RUN) {
     if (writtenCount === 0) {
       console.log("\nDRY-RUN: geen nieuwe artikelen (alles skip).");
@@ -499,9 +504,7 @@ async function main() {
       if (newArticles.length) {
         console.log("\nDRY-RUN: dit zou worden gepubliceerd:");
         for (const a of newArticles) {
-          console.log(
-            `- ${a.category} | ${a.article_type}/${a.topic_mode} | ${a.title} (${a.slug})`
-          );
+          console.log(`- ${a.category} | ${a.article_type}/${a.topic_mode} | ${a.title} (${a.slug})`);
           console.log(`  bron: ${a.source_url || "(societal_pulse)"}`);
         }
       } else {
@@ -511,7 +514,6 @@ async function main() {
     return;
   }
 
-  // In forced pending mode we may publish nothing: that's OK.
   if (newArticles.length === 0) {
     console.log(`\nGeschreven (incl pending): ${writtenCount}/${LIMIT}`);
     console.log("Geen nieuwe artikelen gepubliceerd (alles ging naar pending/skip).");
@@ -519,9 +521,24 @@ async function main() {
     return;
   }
 
-  // merge + featured + write
   let merged = [...newArticles, ...existing];
   merged = applyFeaturedRules(merged, { maxFeatured: MAX_FEATURED, ttlHours: FEATURED_TTL_HOURS });
+    // --- GARANTIE: altijd minstens 1 featured ---
+  if (!merged.some((a) => a.is_featured)) {
+    const fallback =
+      merged.find((a) => !a.is_short_news && a.article_type !== "short") ||
+      merged.find((a) => FEATURED_CATEGORIES.includes(a.category)) ||
+      merged[0];
+
+    if (fallback) {
+      const now = Date.now();
+      fallback.is_featured = true;
+      fallback.featured_at = new Date(now).toISOString();
+      fallback.featured_until = new Date(
+        now + FEATURED_TTL_HOURS * 3600 * 1000
+      ).toISOString();
+    }
+  }
   writeJson(OUT_PATH, merged);
 
   console.log(`\nGeschreven: ${OUT_PATH}`);
@@ -594,50 +611,19 @@ async function buildTrendContext(trend, { topic_mode, existingSources, newsPerTr
   return { news, actualTrend: trend, sourceSummary };
 }
 
-function cutToSentenceEnd(text) {
-  let t = String(text || "").trim();
-  if (!t) return t;
-
-  // netjes einde? klaar.
-  if (/[.!?…]["'”’)\]]?\s*$/.test(t)) return t;
-
-  // zoek laatste zins-einde in de laatste ~500 chars
-  const tail = t.slice(-500);
-  const lastDot = tail.lastIndexOf(".");
-  const lastExc = tail.lastIndexOf("!");
-  const lastQ = tail.lastIndexOf("?");
-  const lastEll = tail.lastIndexOf("…");
-  const last = Math.max(lastDot, lastExc, lastQ, lastEll);
-
-  if (last >= 0) {
-    const cutIndex = t.length - (tail.length - last) + 1;
-    t = t.slice(0, cutIndex).trim();
-    return t;
-  }
-
-  // geen zins-einde gevonden: forceer punt
-  return t.replace(/\s*$/, "") + ".";
-}
-
 function finalizeContent(content_markdown, article_type) {
   if (!content_markdown) return "";
 
-  // Opschonen, maar NIET inkorten
   let text = removeAuthorSignature(String(content_markdown));
 
   if (article_type === "investigation") {
     text = normalizeInvestigationMarkdown(text);
-
-    // Forceer kopjes naar ##
     text = text.replace(/^#{3,}\s+/gm, "## ");
-
     return text.trim();
   }
 
-  // Normale artikelen: alleen paragrafen normaliseren
   return normalizeParagraphs(text, { minSentences: 2, maxSentences: 4 }).trim();
 }
-
 
 function makeArticle({
   title,
@@ -760,11 +746,7 @@ async function notifyReviewNeeded({ title, score, reason }) {
   ].filter(Boolean);
 
   const text = msgParts.join(" ");
-
-  // Slack Incoming Webhook format:
   const payload = { text };
-
-  // If you use Discord, change to: const payload = { content: text };
 
   await fetch(REVIEW_WEBHOOK_URL, {
     method: "POST",

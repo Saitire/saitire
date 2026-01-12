@@ -26,22 +26,52 @@ export default function Header() {
 
       <nav className="bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-1 py-2 overflow-x-auto">
-            <Link
-              to="/"
-              className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
-            >
-              Home
-            </Link>
-            {CATEGORIES.map((c) => (
+          <div className="flex items-center gap-1 py-2">
+            {/* links: home + categorieën */}
+            <div className="flex items-center gap-1 overflow-x-auto">
               <Link
-                key={c.key}
-                to={`/categorie/${c.key}`}
+                to="/"
                 className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
               >
-                {c.label}
+                Home
               </Link>
-            ))}
+
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.key}
+                  to={`/categorie/${c.key}`}
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* rechts: redactie */}
+            <div className="ml-auto flex items-center">
+              <Link
+                to="/redactie"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
+              >
+                Redactie
+              </Link>
+               <div className="ml-auto flex items-center">
+              <Link
+                to="/feedback"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
+              >
+                Feedback
+              </Link>
+              <div className="ml-auto flex items-center">
+              <Link
+                to="/explainer"
+                className="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100"
+              >
+                Explainer
+              </Link>
+              </div>
+              </div>
+            </div>
           </div>
         </div>
       </nav>

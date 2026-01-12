@@ -1,22 +1,17 @@
-/**
- * scripts/update_prompt_profile.js
- *
- * Leest menselijke feedback en vertaalt dit naar schrijfregels
- * voor toekomstige artikelgeneratie.
- *
- * Run:
- *   node scripts/update_prompt_profile.js
- */
-
+// scripts/update_prompt_profile.js
 import fs from "node:fs";
 import path from "node:path";
 import OpenAI from "openai";
 import "dotenv/config";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 const FEEDBACK_PATH = path.join(process.cwd(), "reviews", "feedback.jsonl");
 const PROFILE_PATH = path.join(process.cwd(), "scripts", "prompt_profile.json");
+
+function getOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw new Error("OPENAI_API_KEY ontbreekt (update_prompt_profile kan niet draaien zonder key).");
+  return new OpenAI({ apiKey });
+}
 
 function readLines(p) {
   if (!fs.existsSync(p)) return [];
@@ -33,7 +28,7 @@ function writeJson(p, data) {
   fs.writeFileSync(p, JSON.stringify(data, null, 2) + "\n");
 }
 
-async function summarizeFeedback(feedbackItems) {
+async function summarizeFeedback(openai, feedbackItems) {
   const prompt = `
 Je bent hoofdredacteur.
 
@@ -65,7 +60,7 @@ Regels:
     messages: [{ role: "user", content: prompt }],
   });
 
-  return JSON.parse(res.choices[0].message.content);
+  return JSON.parse(res.choices?.[0]?.message?.content || "{}");
 }
 
 async function main() {
@@ -75,7 +70,6 @@ async function main() {
     return;
   }
 
-  // pak laatste 20 feedback-items
   const feedbackItems = lines
     .map((l) => JSON.parse(l))
     .filter((x) => x.action === "reject" && x.feedback)
@@ -86,11 +80,11 @@ async function main() {
     return;
   }
 
-  const summary = await summarizeFeedback(feedbackItems);
+  const openai = getOpenAI();
+  const summary = await summarizeFeedback(openai, feedbackItems);
 
   const profile = readJson(PROFILE_PATH, { rules: [] });
 
-  // merge + dedupe
   const mergedRules = [...profile.rules, ...(summary.rules || [])];
   const uniqueRules = [...new Set(mergedRules)].slice(-10);
 
@@ -104,4 +98,7 @@ async function main() {
   uniqueRules.forEach((r) => console.log("-", r));
 }
 
-main().catch(console.error);
+main().catch((e) => {
+  console.error("FOUT:", e?.stack || e);
+  process.exit(1);
+});
