@@ -1,7 +1,13 @@
 // src/pages/Admin.jsx
 import React, { useEffect, useMemo, useState } from "react";
 
-const API_BASE = import.meta.env.VITE_ADMIN_API_BASE || "http://localhost:5179";
+const API_BASE = (() => {
+  const v = (import.meta.env.VITE_ADMIN_API_BASE || "").trim().replace(/\/$/, "");
+  if (v) return v;
+
+  // Cloudflare Pages → API is same-origin
+  return window.location.origin;
+})();
 
 function getToken() {
   return localStorage.getItem("admin_token") || "";

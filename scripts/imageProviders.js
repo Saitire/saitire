@@ -1,8 +1,21 @@
 // scripts/imageProviders.js
+console.log(">>> imageProviders.js LOADED <<<", import.meta.url);
+
 import "dotenv/config";
 import { generateImage } from "./generateImage.js";
+import { uploadImageUrlToR2 } from "./lib/r2Upload.js";
 
 const IMAGE_WIDTHS_DEFAULT = { thumb: 200, small: 480, medium: 800, large: 1200 };
+
+function rid(prefix = "img") {
+  return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
+}
+
+function log(ctx, msg, extra) {
+  const base = `[${new Date().toISOString()}] [${ctx}] ${msg}`;
+  if (extra !== undefined) console.log(base, extra);
+  else console.log(base);
+}
 
 function cleanMetaString(s) {
   return String(s || "").replace(/\s+/g, " ").trim();
@@ -11,19 +24,14 @@ function stripQuotes(s) {
   return String(s || "").replace(/[“”„"]/g, "").trim();
 }
 
-/**
- * Bouw een korte prompt op basis van velden die je al hebt.
- * (Geen nieuwe data, geen search, geen extra calls.)
- */
 function buildPrompt({ title, trend, category, sourceHeadline }) {
   const ti = stripQuotes(cleanMetaString(title));
   const tr = cleanMetaString(trend);
   const cat = cleanMetaString(category);
   const sh = stripQuotes(cleanMetaString(sourceHeadline));
 
-  // Korte, stabiele prompt voor Turbo (werkt beter dan lange instructies)
   const lines = [
-    "- Realistic photography, Contemporary, modern look, Neutral color grading, Natural lighting, No stylization or illustration",
+    "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style",
     cat ? `category vibe: ${cat}` : "",
     ti ? `title concept: ${ti}` : "",
     tr ? `trend context: ${tr}` : "",
@@ -33,38 +41,92 @@ function buildPrompt({ title, trend, category, sourceHeadline }) {
   return lines.join(". ");
 }
 
-/**
- * Genereer 1 image via Replicate SDXL Turbo (via scripts/generateImage.js),
- * maar geef het terug in dezelfde shape als vroeger.
- */
 async function generateImageReplicate({ title, trend, category, sourceHeadline, slug }) {
+  const requestId = rid("img");
+  const ctx = `${requestId}:${slug || "no-slug"}`;
+
   const prompt = buildPrompt({ title, trend, category, sourceHeadline });
 
-  const res = await generateImage({
+  log(ctx, "start generateImageReplicate", {
     slug,
-    title: cleanMetaString(title),
-    summary: cleanMetaString(sourceHeadline || trend || ""),
+    title: cleanMetaString(title)?.slice(0, 120),
     category: cleanMetaString(category),
-    force: false,
-    steps: 4,
+    trend: cleanMetaString(trend)?.slice(0, 120),
+    sourceHeadline: cleanMetaString(sourceHeadline)?.slice(0, 120),
+    promptPreview: prompt.slice(0, 180),
   });
 
-  // res: { url, cached, prompt } (uit generateImage.js)
-  const url = res?.url || null;
-  if (!url) return null;
+  // 1) Replicate genereert → geeft een URL terug
+  const t0 = Date.now();
+  let res;
+  try {
+    res = await generateImage({
+      slug,
+      title: cleanMetaString(title),
+      summary: cleanMetaString(sourceHeadline || trend || ""),
+      category: cleanMetaString(category),
+      force: false,
+      steps: 4,
+    });
+    log(ctx, "generateImage OK", { ms: Date.now() - t0, resKeys: Object.keys(res || {}) });
+  } catch (e) {
+    log(ctx, "generateImage FAILED", {
+      ms: Date.now() - t0,
+      name: e?.name,
+      message: e?.message,
+      stack: e?.stack?.split("\n").slice(0, 6).join("\n"),
+    });
+    return null;
+  }
 
-  // Return shape compatibel met attachImage(article, img)
+    const replicateUrlRaw = res?.url || null;
+    if (!replicateUrlRaw) return null;
+
+    // Als generateImage soms een pad teruggeeft: maak er een absolute URL van
+    const base = process.env.IMAGE_BASE_URL || process.env.PUBLIC_SITE_URL || "http://localhost:8787";
+    const replicateUrl =
+      replicateUrlRaw.startsWith("http")
+        ? replicateUrlRaw
+        : new URL(replicateUrlRaw, base).toString();
+
+  // 2) Upload naar R2 → krijg R2 public URL
+  const t1 = Date.now();
+  let uploaded;
+  try {
+    console.log("[imageProviders] calling uploadImageUrlToR2", { slug, replicateUrl });
+    uploaded = await uploadImageUrlToR2({ imageUrl: replicateUrl, slug, requestId });
+    log(ctx, "uploadImageUrlToR2 OK", {
+      ms: Date.now() - t1,
+      uploadedKeys: Object.keys(uploaded || {}),
+      url: uploaded?.url,
+      key: uploaded?.key,
+      etag: uploaded?.etag,
+      size: uploaded?.size,
+      contentType: uploaded?.contentType,
+    });
+  } catch (e) {
+    log(ctx, "uploadImageUrlToR2 FAILED", {
+      ms: Date.now() - t1,
+      name: e?.name,
+      message: e?.message,
+      stack: e?.stack?.split("\n").slice(0, 8).join("\n"),
+    });
+    return null;
+  }
+
+  const url = uploaded?.url || null;
+  if (!url) {
+    log(ctx, "NO uploaded.url -> returning null", uploaded);
+    return null;
+  }
+
+  log(ctx, "done", { finalUrl: url });
+
   return {
-    provider: "replicate/sdxl-turbo",
+    provider: "r2 (via replicate)",
     query: prompt.slice(0, 200),
     file_title: cleanMetaString(title) || "AI image",
-    urls: {
-      original: url,
-      large: url,
-      medium: url,
-      small: url,
-      thumb: url,
-    },
+    urls: { original: url, large: url, medium: url, small: url, thumb: url },
     source_page_url: null,
     license: { short: "AI-generated", url: null },
     author: null,
@@ -73,19 +135,12 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
   };
 }
 
+
 /* -------------------- PUBLIC API -------------------- */
 export async function getArticleImage(
   { title, trend, category, sourceHeadline, slug },
-  {
-    mode = "gen", // "gen" | "web" | "off" (web wordt nu behandeld als gen)
-    widths = IMAGE_WIDTHS_DEFAULT, // blijft voor compat, maar niet meer gebruikt
-    openverseLicenses = null,      // compat
-    enable = null,                 // compat
-  } = {}
+  { mode = "gen", widths = IMAGE_WIDTHS_DEFAULT } = {}
 ) {
   if (mode === "off") return null;
-
-  // We houden publish clean: publish mag "web" of "gen" blijven sturen,
-  // maar intern doen we altijd replicate gen (geen web search meer).
   return await generateImageReplicate({ title, trend, category, sourceHeadline, slug });
 }
