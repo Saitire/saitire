@@ -41,6 +41,36 @@ function buildPrompt({ title, trend, category, sourceHeadline }) {
   return lines.join(". ");
 }
 
+function normalizeGeneratedImageUrl(rawUrl) {
+  const raw = String(rawUrl || "").trim();
+  if (!raw) return null;
+
+  // 1) Als het al een lokaal pad is: laat staan
+  if (raw.startsWith("/images/")) return raw;
+
+  // 2) Als generateImage ooit PUBLIC_SITE_URL ervoor plakt:
+  //    https://saitire.nl/images/... => maak er weer /images/... van (anders krijg je HTML)
+  const publicBase = (process.env.PUBLIC_SITE_URL || "").trim().replace(/\/$/, "");
+  if (publicBase && raw.startsWith(publicBase + "/images/")) {
+    try {
+      const u = new URL(raw);
+      if (u.pathname.startsWith("/images/")) return u.pathname; // ✅ force local read
+    } catch {}
+  }
+
+  // 3) Als het een echte http(s) image URL is (replicate CDN): gebruik direct
+  if (/^https?:\/\//i.test(raw)) return raw;
+
+  // 4) Overig relatief pad -> resolve tegen IMAGE_BASE_URL of dev server
+  const base =
+    (process.env.IMAGE_BASE_URL || "").trim().replace(/\/$/, "") ||
+    (process.env.VITE_DEV_SERVER_URL || "").trim().replace(/\/$/, "") ||
+    "http://localhost:5173";
+
+  return new URL(raw, base + "/").toString();
+}
+
+
 async function generateImageReplicate({ title, trend, category, sourceHeadline, slug }) {
   const requestId = rid("img");
   const ctx = `${requestId}:${slug || "no-slug"}`;
@@ -79,8 +109,11 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
     return null;
   }
 
-    const replicateUrlRaw = String(res?.url || "").trim();
+    const replicateUrlRaw = res?.url || null;
     if (!replicateUrlRaw) return null;
+
+    const sourceUrl = normalizeGeneratedImageUrl(replicateUrlRaw);
+    if (!sourceUrl) return null;
 
     let sourceUrl = replicateUrlRaw;
 
@@ -101,7 +134,7 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
   const t1 = Date.now();
   let uploaded;
   try {
-    console.log("[imageProviders] calling uploadImageUrlToR2", { slug, replicateUrl });
+    console.log("[imageProviders] calling uploadImageUrlToR2", { slug, sourceUrl });
     uploaded = await uploadImageUrlToR2({ imageUrl: sourceUrl, slug, requestId });
     log(ctx, "uploadImageUrlToR2 OK", {
       ms: Date.now() - t1,
