@@ -1,24 +1,27 @@
 // src/api/comments.js
-const API_BASE =
-  import.meta.env.VITE_ADMIN_API_URL ||
-  import.meta.env.VITE_API_BASE ||
-  "http://localhost:5179";
 
 export async function fetchComments(slug) {
-  const res = await fetch(`${API_BASE}/api/comments/${encodeURIComponent(slug)}`);
-  if (!res.ok) throw new Error(`fetchComments failed ${res.status}`);
-  const data = await res.json();
-  return data.comments || [];
+  if (!slug) return [];
+  const res = await fetch(`/api/comments?slug=${encodeURIComponent(slug)}`, {
+    method: "GET",
+    headers: { accept: "application/json" },
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data?.error || `fetchComments failed ${res.status}`);
+  return Array.isArray(data?.comments) ? data.comments : [];
 }
 
 export async function postComment({ slug, name, text, parent_id = null }) {
-  const res = await fetch(`${API_BASE}/api/comments`, {
+  const res = await fetch(`/api/comments`, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify({ slug, name, text, parent_id }),
   });
 
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data?.error || `postComment failed ${res.status}`);
-  return data.comment;
+
+  // Comments.jsx invalidateQueries haalt daarna de lijst opnieuw op
+  return data;
 }
