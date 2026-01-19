@@ -105,6 +105,10 @@ const FEEDBACK_MAX_EDITOR = 6;
 const IMAGE_MODE = process.env.IMAGE_MODE || "gen"; // "web" | "gen" | "off"
 const IMAGE_WIDTHS = { thumb: 200, small: 480, medium: 800, large: 1200 };
 
+// Production Admin end point
+const SITE_BASE = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+
 // -------------------- BOOT --------------------
 const args = parseArgs(process.argv.slice(2));
 const FORCE = !!args.force;
@@ -474,13 +478,26 @@ async function main() {
       console.log(`  -> Naar wachtrij (needs_human): score ${review.score} | ${article.title}`);
 
       if (!DRY_RUN) {
+      article.review_status = "needs_human";
+
+      if (!SITE_BASE || !ADMIN_PASSWORD) {
+        // fallback: lokaal (handig als je het nog wilt)
         const pending = readJson(PENDING_PATH, []);
-        article.review_status = "needs_human";
         pending.unshift(article);
         writeJsonFile(PENDING_PATH, pending);
-
-        await notifyReviewNeeded({ title: article.title, score: review.score, reason: "Pending review" });
+      } else {
+        await fetch(`${SITE_BASE}/api/pending_upsert`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${ADMIN_PASSWORD}`,
+          },
+          body: JSON.stringify({ item: article }),
+        });
       }
+
+      await notifyReviewNeeded({ title: article.title, score: review.score, reason: "Pending review" });
+    }
 
       writtenCount++;
       if (writtenCount >= LIMIT) break;
