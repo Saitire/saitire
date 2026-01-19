@@ -6,15 +6,28 @@ import Footer from "../components/Footer";
 import RightRail from "../components/RightRail";
 import { fetchArticles, sortByDateDesc } from "../api/articles";
 
-const API_BASE = import.meta.env.VITE_ADMIN_API_BASE || "http://localhost:5179";
+// Gebruik dezelfde origin in productie én lokaal.
+// Optioneel: als je ooit een externe API host wil, zet VITE_API_BASE naar "https://...".
+// Laat anders leeg.
+const API_BASE = (import.meta.env.VITE_API_BASE || "").replace(/\/$/, "");
+const FEEDBACK_ENDPOINT = `${API_BASE}/api/feedback`;
 
 async function postFeedback(payload) {
-  const res = await fetch(`${API_BASE}/api/feedback`, {
+  const res = await fetch(FEEDBACK_ENDPOINT, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  const data = await res.json().catch(() => ({}));
+
+  // Als er ooit HTML terugkomt (fallback), wil je niet crashen op res.json()
+  const text = await res.text();
+  let data = {};
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    data = { error: "Non-JSON response", raw: text?.slice(0, 200) };
+  }
+
   if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
   return data;
 }
