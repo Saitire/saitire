@@ -81,7 +81,7 @@ export default function Admin() {
   }
 
   async function refreshFeedback() {
-    const data = await api("/api/feedback");
+    const data = await api("/api/feedback_list");
     setFeedbackItems(data.feedback || []);
   }
 
