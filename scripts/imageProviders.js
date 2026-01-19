@@ -79,22 +79,30 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
     return null;
   }
 
-    const replicateUrlRaw = res?.url || null;
+    const replicateUrlRaw = String(res?.url || "").trim();
     if (!replicateUrlRaw) return null;
 
-    // Als generateImage soms een pad teruggeeft: maak er een absolute URL van
-    const base = process.env.IMAGE_BASE_URL || process.env.PUBLIC_SITE_URL || "http://localhost:8787";
-    const replicateUrl =
-      replicateUrlRaw.startsWith("http")
-        ? replicateUrlRaw
-        : new URL(replicateUrlRaw, base).toString();
+    let sourceUrl = replicateUrlRaw;
+
+    if (replicateUrlRaw.startsWith("/images/")) {
+      // laat lokaal pad staan; r2Upload leest dit van disk
+      sourceUrl = replicateUrlRaw;
+    } else if (/^https?:\/\//i.test(replicateUrlRaw)) {
+      sourceUrl = replicateUrlRaw;
+    } else {
+      const base =
+        (process.env.IMAGE_BASE_URL || "").trim().replace(/\/$/, "") ||
+        (process.env.VITE_DEV_SERVER_URL || "").trim().replace(/\/$/, "") ||
+        "http://localhost:5173";
+      sourceUrl = new URL(replicateUrlRaw, base + "/").toString();
+    }
 
   // 2) Upload naar R2 → krijg R2 public URL
   const t1 = Date.now();
   let uploaded;
   try {
     console.log("[imageProviders] calling uploadImageUrlToR2", { slug, replicateUrl });
-    uploaded = await uploadImageUrlToR2({ imageUrl: replicateUrl, slug, requestId });
+    uploaded = await uploadImageUrlToR2({ imageUrl: sourceUrl, slug, requestId });
     log(ctx, "uploadImageUrlToR2 OK", {
       ms: Date.now() - t1,
       uploadedKeys: Object.keys(uploaded || {}),

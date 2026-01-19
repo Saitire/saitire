@@ -57,15 +57,17 @@ function keyFor({ slug, ext }) {
 
 function guessBaseUrl() {
   if (process.env.IMAGE_BASE_URL) return process.env.IMAGE_BASE_URL;
-  if (process.env.PUBLIC_SITE_URL) return process.env.PUBLIC_SITE_URL;
   if (process.env.CF_PAGES_URL) return process.env.CF_PAGES_URL;
 
   const nodeEnv = (process.env.NODE_ENV || "").toLowerCase();
   if (nodeEnv !== "production") {
     return process.env.VITE_DEV_SERVER_URL || "http://localhost:5173";
   }
+
+  // In production willen we nooit gokken naar PUBLIC_SITE_URL voor een relatieve image,
+  // omdat dat vaak SPA HTML teruggeeft. Forceer dan expliciet IMAGE_BASE_URL.
   throw new Error(
-    "Relatieve imageUrl maar geen base gevonden. Zet IMAGE_BASE_URL of PUBLIC_SITE_URL."
+    "Relatieve imageUrl maar geen base gevonden. Zet IMAGE_BASE_URL (niet PUBLIC_SITE_URL) voor relatieve image URLs."
   );
 }
 
