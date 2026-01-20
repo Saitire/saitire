@@ -24,6 +24,9 @@ function stripQuotes(s) {
   return String(s || "").replace(/[“”„"]/g, "").trim();
 }
 
+/**
+ * Korte, stabiele prompt (voor logging / trace; de echte prompt zit in generateImage zelf)
+ */
 function buildPrompt({ title, trend, category, sourceHeadline }) {
   const ti = stripQuotes(cleanMetaString(title));
   const tr = cleanMetaString(trend);
@@ -41,27 +44,39 @@ function buildPrompt({ title, trend, category, sourceHeadline }) {
   return lines.join(". ");
 }
 
+/**
+ * Normaliseer de URL die generateImage teruggeeft.
+ *
+ * Doel:
+ * - /images/... => lees lokaal bestand op de runner en upload naar R2
+ * - https://<PUBLIC_SITE_URL>/images/... => terugzetten naar /images/... (SPA HTML vermijden)
+ * - echte http(s) url => direct gebruiken (Replicate CDN e.d.)
+ * - overige relatieve paden => resolven tegen IMAGE_BASE_URL of dev server (NIET PUBLIC_SITE_URL)
+ */
 function normalizeGeneratedImageUrl(rawUrl) {
   const raw = String(rawUrl || "").trim();
   if (!raw) return null;
 
-  // 1) Als het al een lokaal pad is: laat staan
+  // 1) lokaal images pad
   if (raw.startsWith("/images/")) return raw;
 
-  // 2) Als generateImage ooit PUBLIC_SITE_URL ervoor plakt:
-  //    https://saitire.nl/images/... => maak er weer /images/... van (anders krijg je HTML)
+  // 2) als iemand ooit PUBLIC_SITE_URL ervoor plakt (gevaarlijk: geeft HTML in productie)
   const publicBase = (process.env.PUBLIC_SITE_URL || "").trim().replace(/\/$/, "");
   if (publicBase && raw.startsWith(publicBase + "/images/")) {
     try {
       const u = new URL(raw);
-      if (u.pathname.startsWith("/images/")) return u.pathname; // ✅ force local read
-    } catch {}
+      if (u.pathname.startsWith("/images/")) return u.pathname;
+    } catch {
+      // fallback: probeer het stuk na /images/ te pakken
+      const idx = raw.indexOf("/images/");
+      if (idx >= 0) return raw.slice(idx);
+    }
   }
 
-  // 3) Als het een echte http(s) image URL is (replicate CDN): gebruik direct
+  // 3) echte remote url
   if (/^https?:\/\//i.test(raw)) return raw;
 
-  // 4) Overig relatief pad -> resolve tegen IMAGE_BASE_URL of dev server
+  // 4) ander relatief pad -> resolve tegen image base / dev server
   const base =
     (process.env.IMAGE_BASE_URL || "").trim().replace(/\/$/, "") ||
     (process.env.VITE_DEV_SERVER_URL || "").trim().replace(/\/$/, "") ||
@@ -69,7 +84,6 @@ function normalizeGeneratedImageUrl(rawUrl) {
 
   return new URL(raw, base + "/").toString();
 }
-
 
 async function generateImageReplicate({ title, trend, category, sourceHeadline, slug }) {
   const requestId = rid("img");
@@ -86,7 +100,7 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
     promptPreview: prompt.slice(0, 180),
   });
 
-  // 1) Replicate genereert → geeft een URL terug
+  // 1) Genereren -> URL terug
   const t0 = Date.now();
   let res;
   try {
@@ -109,28 +123,19 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
     return null;
   }
 
-    const replicateUrlRaw = res?.url || null;
-    if (!replicateUrlRaw) return null;
+  const replicateUrlRaw = String(res?.url || "").trim();
+  if (!replicateUrlRaw) {
+    log(ctx, "generateImage returned no url", res);
+    return null;
+  }
 
-    const sourceUrl = normalizeGeneratedImageUrl(replicateUrlRaw);
-    if (!sourceUrl) return null;
+  const sourceUrl = normalizeGeneratedImageUrl(replicateUrlRaw);
+  if (!sourceUrl) {
+    log(ctx, "normalizeGeneratedImageUrl returned null", { replicateUrlRaw });
+    return null;
+  }
 
-    let sourceUrl = replicateUrlRaw;
-
-    if (replicateUrlRaw.startsWith("/images/")) {
-      // laat lokaal pad staan; r2Upload leest dit van disk
-      sourceUrl = replicateUrlRaw;
-    } else if (/^https?:\/\//i.test(replicateUrlRaw)) {
-      sourceUrl = replicateUrlRaw;
-    } else {
-      const base =
-        (process.env.IMAGE_BASE_URL || "").trim().replace(/\/$/, "") ||
-        (process.env.VITE_DEV_SERVER_URL || "").trim().replace(/\/$/, "") ||
-        "http://localhost:5173";
-      sourceUrl = new URL(replicateUrlRaw, base + "/").toString();
-    }
-
-  // 2) Upload naar R2 → krijg R2 public URL
+  // 2) Upload naar R2
   const t1 = Date.now();
   let uploaded;
   try {
@@ -176,12 +181,12 @@ async function generateImageReplicate({ title, trend, category, sourceHeadline, 
   };
 }
 
-
 /* -------------------- PUBLIC API -------------------- */
 export async function getArticleImage(
   { title, trend, category, sourceHeadline, slug },
   { mode = "gen", widths = IMAGE_WIDTHS_DEFAULT } = {}
 ) {
   if (mode === "off") return null;
+  // widths param kept for API compatibility; currently unused because we upload 1 original
   return await generateImageReplicate({ title, trend, category, sourceHeadline, slug });
 }
