@@ -37,7 +37,7 @@ export default function RedactiePage() {
       punchline: "Mooi geprobeerd. Nu graag waar.",
       footer_line: "Dit had strakker gekund.",
       catchphrases: ["Dit is niet ludiek.", "De drempel wordt hier niet gehaald.", "Volgende."],
-      photo_url: "/images/editors/Marius de Graaf.png",
+      photo_url: "/static/editors/Marius de Graaf.png",
       vibe: "Procedureel, afstandelijk, moreel neutraal.",
     }),
     []

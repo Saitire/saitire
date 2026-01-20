@@ -21,7 +21,7 @@ export default function ExplainerPage() {
           <section className="lg:col-span-8">
             <div className="bg-white rounded-2xl border border-slate-100 p-6">
               <img
-                src="/images/explainer/SAITIRE-website-explainer.png"
+                src="/static/explainer/explainer.png"
                 alt="SAITIRE website uitleg"
                 className="w-full rounded-xl border border-slate-200"
               />
