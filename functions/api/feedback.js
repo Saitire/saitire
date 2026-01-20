@@ -1,4 +1,5 @@
 // functions/api/feedback.js
+import crypto from "node:crypto";
 
 function json(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data), {
@@ -9,8 +10,8 @@ function json(data, status = 200, headers = {}) {
 
 const CORS = {
   "access-control-allow-origin": "*",
-  "access-control-allow-methods": "POST,OPTIONS",
-  "access-control-allow-headers": "content-type",
+  "access-control-allow-methods": "GET,POST,OPTIONS",
+  "access-control-allow-headers": "content-type,authorization",
 };
 
 function clamp(s, n) {
@@ -22,6 +23,65 @@ export async function onRequestOptions() {
   return new Response(null, { status: 204, headers: CORS });
 }
 
+function isAdmin(request, env) {
+  const h = request.headers.get("authorization") || "";
+  const token = h.startsWith("Bearer ") ? h.slice(7) : "";
+  return Boolean(env.ADMIN_PASSWORD && token && token === env.ADMIN_PASSWORD);
+}
+
+async function listKeysAll(bucket, prefix) {
+  const keys = [];
+  let cursor = undefined;
+
+  for (;;) {
+    const res = await bucket.list({ prefix, cursor });
+    for (const o of res.objects || []) keys.push(o.key);
+    if (!res.truncated) break;
+    cursor = res.cursor;
+  }
+
+  return keys;
+}
+
+// -------------------- GET (admin) --------------------
+export async function onRequestGet({ request, env }) {
+  if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401, CORS);
+  if (!env.FEEDBACK_BUCKET) return json({ error: "FEEDBACK_BUCKET binding missing" }, 500, CORS);
+
+  // user feedback + admin reject feedback
+  const prefixes = ["feedback/", "reject/"];
+  const keys = [];
+
+  for (const p of prefixes) {
+    const ks = await listKeysAll(env.FEEDBACK_BUCKET, p);
+    keys.push(...ks);
+  }
+
+  // keys bevatten datum in pad, dus sort geeft ongeveer chronologisch; neem de laatste N
+  keys.sort();
+  const last = keys.slice(-400).reverse();
+
+  const items = [];
+  for (const key of last) {
+    const obj = await env.FEEDBACK_BUCKET.get(key);
+    if (!obj) continue;
+    try {
+      const v = JSON.parse(await obj.text());
+      if (v && typeof v === "object") items.push(v);
+    } catch {}
+  }
+
+  // newest first op created_at
+  items.sort((a, b) => {
+    const da = a?.created_at ? new Date(a.created_at).getTime() : 0;
+    const db = b?.created_at ? new Date(b.created_at).getTime() : 0;
+    return db - da;
+  });
+
+  return json({ feedback: items }, 200, CORS);
+}
+
+// -------------------- POST (public) --------------------
 export async function onRequestPost({ request, env }) {
   if (!env.FEEDBACK_BUCKET) {
     return json({ error: "FEEDBACK_BUCKET binding missing" }, 500, CORS);
