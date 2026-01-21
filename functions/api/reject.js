@@ -12,7 +12,7 @@ const CORS = {
   "access-control-allow-headers": "content-type,authorization",
 };
 
-export function onRequestOptions() {
+function handleOptions() {
   return new Response(null, { status: 204, headers: CORS });
 }
 
@@ -44,7 +44,7 @@ function clamp(s, n) {
   return t.length > n ? t.slice(0, n) : t;
 }
 
-export async function onRequestPost({ request, env }) {
+async function handlePost({ request, env }) {
   if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401, CORS);
   if (!env.PENDING_BUCKET) return json({ error: "PENDING_BUCKET binding missing" }, 500, CORS);
 
@@ -87,4 +87,19 @@ export async function onRequestPost({ request, env }) {
   }
 
   return json({ ok: true, id }, 200, CORS);
+}
+
+export function onRequestOptions() {
+  return handleOptions();
+}
+
+export async function onRequestPost(context) {
+  return handlePost(context);
+}
+
+export async function onRequest(context) {
+  const method = context.request.method.toUpperCase();
+  if (method === "OPTIONS") return handleOptions();
+  if (method === "POST") return handlePost(context);
+  return json({ error: "Method Not Allowed" }, 405, CORS);
 }
