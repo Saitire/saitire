@@ -1,5 +1,4 @@
 // functions/api/feedback.js
-import crypto from "node:crypto";
 
 function json(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data), {
@@ -17,6 +16,11 @@ const CORS = {
 function clamp(s, n) {
   const t = String(s || "").trim();
   return t.length > n ? t.slice(0, n) : t;
+}
+
+function randomId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `id_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
 export async function onRequestOptions() {
@@ -97,7 +101,7 @@ export async function onRequestPost({ request, env }) {
 
   if (!message) return json({ error: "Message required" }, 400, CORS);
 
-  const id = crypto.randomUUID();
+  const id = randomId();
   const created_at = new Date().toISOString();
 
   const item = {

@@ -1,5 +1,4 @@
 // functions/api/approve.js
-import crypto from "node:crypto";
 
 function json(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data), {
@@ -45,12 +44,17 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+function randomId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `id_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
 function normalizeApprovedItem(item) {
   const created = item?.created_date || item?.created_at || nowIso();
 
   return {
     ...item,
-    id: item?.id || crypto.randomUUID(),
+    id: item?.id || randomId(),
     created_date: created,
 
     // match jouw huidige "live artikel" semantic:
