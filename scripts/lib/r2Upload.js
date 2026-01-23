@@ -9,7 +9,15 @@ console.log("[r2Upload] MODULE LOADED", import.meta.url);
 function required(name) {
   const v = process.env[name];
   if (!v) throw new Error(`${name} ontbreekt`);
-  return v;
+    return sanitizeEnv(v, name);
+}
+
+function sanitizeEnv(value, name) {
+  const cleaned = String(value)
+    .replace(/[\r\n]/g, "")
+    .trim();
+  if (!cleaned) throw new Error(`${name} is leeg na opschonen`);
+  return cleaned;
 }
 
 function rid(prefix = "r2") {
