@@ -1,8 +1,9 @@
 export async function fetchArticles() {
-  const res = await fetch('/articles.json', { cache: 'no-store' });
-  if (!res.ok) throw new Error('Failed to load articles.json');
+  const res = await fetch('/api/published', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load published articles');
   const data = await res.json();
-  return Array.isArray(data) ? data : [];
+  const items = Array.isArray(data?.published) ? data.published : [];
+  return items;
 }
 
 export function sortByDateDesc(items) {
