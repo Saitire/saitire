@@ -27,6 +27,9 @@ on:
     - cron: "0 11 * * *"
     - cron: "0 17 * * *"
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -61,7 +64,7 @@ jobs:
           IMAGE_MODE: gen
         
           HUMAN_REVIEW_MODE: "1"
-          FORCE_ALL_TO_PENDING: "1"
+          FORCE_ALL_TO_PENDING: "0"
           HUMAN_REVIEW_SCORE_BELOW: "85"
 
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
@@ -93,7 +96,7 @@ jobs:
           git config user.name "saitire-bot"
           git config user.email "saitire-bot@users.noreply.github.com"
 
-          git add public/articles.json
+          git add public/articles.json reviews/pending.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
