@@ -26,8 +26,8 @@ dist-ssr
 
 # ---- runtime output (NIET committen) ----
 reviews/*.json
+!reviews/pending.json
 reviews/feedback.jsonl
-reviews/pending.json
 
 public/pending.json
 public/feedback.jsonl
