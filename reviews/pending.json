@@ -1,5 +1,61 @@
 [
   {
+    "id": "c8ef21db-cf4d-417b-8dea-55db088b4c93",
+    "slug": "jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs",
+    "title": "Jim Carrey wordt ambassadeur voor onderbetaalde Nederlandse acteurs",
+    "subtitle": "Ministerie kiest Hollywood-ster die klaagde over 20 miljoen dollar als symbool voor betere waardering",
+    "category": "cultuur",
+    "content": "Nederlandse theatermakers worstelen al jaren met lage gages, waarbij acteurs vaak genoegen moeten nemen met bedragen onder de duizend euro per voorstelling. Het ministerie van Onderwijs, Cultuur en Wetenschap heeft nu een opmerkelijke oplossing gevonden: Jim Carrey wordt officiële ambassadeur voor de campagne 'Elke Rol Verdient Meer'. De keuze voor Carrey ontstond nadat de Hollywood-acteur openlijk klaagde dat zijn 20 miljoen dollar voor de film Sonic ontoereikend was voor de emotionele zwaarte van zijn rol.\n\n\"Jim begrijpt als geen ander de heroïsche strijd van een kunstenaar tegen onderwaardering,\" aldus een ministeriële woordvoerder. De campagne bestaat uit billboards met Carrey's uitspraak \"Dit was de zwaarste rol van mijn carrière\", gevolgd door \"Ook jij verdient eerlijke betaling\". Het Fonds Podiumkunsten bekostigt de beeldrechten door het budget voor beginnende theatergezelschappen te herbestemmen.\n\nCarrey heeft nog niet gereageerd op het ambassadeurschap, maar volgens bronnen staat hij \"volledig achter elke vorm van solidariteit met onderbetaalde kunstenaars wereldwijd\". De officiële lancering vindt plaats tijdens de Nationale Theaterdag, waar een levensecht hologram van Carrey gastsprekers zal begroeten in vloeiend Nederlands met zwaar Amerikaans accent. De technische voorbereidingen verlopen naar tevredenheid.",
+    "topic_mode": "trending",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: cultuur. title concept: Jim Carrey wordt ambassadeur voor onderbetaalde ",
+      "file_title": "Jim Carrey wordt ambassadeur voor onderbetaalde Nederlandse acteurs",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+        "large": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+        "medium": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+        "small": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/01/jim-carrey-wordt-ambassadeur-voor-onderbetaalde-nederlandse-acteurs.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Fenna Foyer",
+    "created_date": "2026-01-27T06:59:39.296Z",
+    "source_url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5KeVhrZDdJdkFoXy1hQjNacnZtMmdHTnplMXM3S0RBNWhJMDlWWEZ6WURMWUJlbmpNajl4Z1JEc0t1UWdQVDFmWG5GZ3N0cjIt?oc=5",
+    "source_headline": "20 miljoen dollar niet genoeg voor Jim Carrey: \"Dit was de zwaarste rol van mijn carrière\" - FilmTotaal",
+    "editor_id": "culture",
+    "editor_name": "Fenna Foyer",
+    "editor_role": "Cultuur",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Direct grappige eerste zin met absurde promotie van Jim Carrey als ambassadeur",
+      "Ludieke kritiek op cultuurbeleid en waardering zonder kwetsend te zijn",
+      "Goede opbouw met steeds absurdere details (hologram, Amerikaans accent)",
+      "Strak ritme met korte alinea’s en geen overbodige opsommingen",
+      "Droge punchline over technische voorbereidingen sluit mooi af"
+    ],
+    "review_id": "c8ef21db-cf4d-417b-8dea-55db088b4c93"
+  },
+  {
     "id": "ba89ec8d-9632-420c-b318-f16fb98964ad",
     "slug": "knvb-introduceert-var-systeem-voor-illegale-voetbalstreams",
     "title": "KNVB introduceert VAR-systeem voor illegale voetbalstreams",
