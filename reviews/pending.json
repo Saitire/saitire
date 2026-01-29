@@ -1,5 +1,61 @@
 [
   {
+    "id": "55765761-a942-42c1-b4af-1d01221e00d9",
+    "slug": "nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen",
+    "title": "Nieuwe woningmarktregels zo complex dat makelaars cursus gaan volgen",
+    "subtitle": "Overheid introduceert 47-stappenplan om discriminatie bij huizenkoop tegen te gaan",
+    "category": "binnenland",
+    "content": "Het ministerie van Volkshuisvesting heeft nieuwe richtlijnen gepresenteerd om discriminatie op de woningmarkt tegen te gaan. Het regelboek telt 127 pagina's en bevat gedetailleerde procedures die makelaars voortaan moeten volgen. Makelaars moeten bij elke bezichtiging een checklist van 47 punten doorlopen.\n\nOok dienen ze bij elke afwijzing een motivatie van minimaal 200 woorden te schrijven. Een typisch voorbeeld begint met: 'Na zorgvuldige overweging van alle factoren en met inachtneming van de geldende wetgeving concluderen wij dat de financiële situatie van betrokkene...' De Nederlandse Vereniging van Makelaars heeft inmiddels een driedaagse cursus ontwikkeld. De regels verbieden termen als 'gezinswoning' en 'starterswoning', omdat deze bepaalde levensstijlen zouden normaliseren.\n\nWoningen moeten worden omschreven als 'woonruimte geschikt voor een of meerdere personen'. Makelaars zijn verplicht bij elke bezichtiging een psychologische test af te nemen om onbewuste vooroordelen te meten. Een speciale overheidsapp zorgt ervoor dat elke stap realtime wordt geüpload, compleet met video-opnames.\n\nMakelaar Richard Vermeer uit Almere klaagt dat hij meer tijd kwijt is aan papierwerk dan aan verkopen. 'Vorige week moest ik een woning afkeuren omdat mijn motivatie slechts 187 woorden bevatte.' Het aantal klachten over discriminatie daalde met 78 procent. Het aantal verkopen kelderde met 82 procent. Volgens staatssecretaris Hanke Bruins Slot is dit bewijs dat eerlijkheid soms een prijs heeft.",
+    "topic_mode": "societal_pulse",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: binnenland. title concept: Nieuwe woningmarktregels zo complex dat makel",
+      "file_title": "Nieuwe woningmarktregels zo complex dat makelaars cursus gaan volgen",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+        "large": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+        "medium": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+        "small": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/01/nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Nova van der Lijn",
+    "created_date": "2026-01-29T11:22:17.122Z",
+    "source_url": null,
+    "source_headline": "Nieuwe regels maken huizen kopen zo ingewikkeld dat zelfs makelaars het niet meer snappen",
+    "editor_id": "anchor",
+    "editor_name": "Nova van der Lijn",
+    "editor_role": "Anchorperson",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Eerste zin pakt direct met een droge observatie over bureaucratie",
+      "Ludieke focus op absurde regels en makelaarsgedrag, niet op mensen",
+      "Goede opbouw met steeds gekkere maatregelen (psychologische test, app)",
+      "Korte alinea’s houden het ritme vlot en luchtig",
+      "Punchline is droog en sluit sterk af met ironische statistieken en quote"
+    ],
+    "review_id": "55765761-a942-42c1-b4af-1d01221e00d9"
+  },
+  {
     "id": "58df3ef1-21b0-4522-bc0b-584cbb57f4e7",
     "slug": "film-land-van-johan-wint-prijs-voor-historische-reconstructie-met-hedendaagse-be",
     "title": "Film 'Land van Johan' wint prijs voor historische reconstructie met hedendaagse beelden",
