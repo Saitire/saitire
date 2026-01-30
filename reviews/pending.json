@@ -1,5 +1,61 @@
 [
   {
+    "id": "9c1e1da3-10be-4445-9472-f1c24d0bb44a",
+    "slug": "apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden",
+    "title": "Apple lanceert AirTag 2 met verbeterde stalking-mogelijkheden",
+    "subtitle": "Stealth Mode en precisietracking maken ongewenste achtervolging toegankelijker dan ooit",
+    "category": "tech",
+    "content": "Apple heeft vandaag de tweede generatie van zijn populaire AirTag-tracker aangekondigd. De AirTag 2 beschikt over driemaal nauwkeurigere locatiebepaling dankzij een vernieuwde Ultra Wideband-chip en een batterijduur van anderhalf jaar. Het bedrijf spreekt van een \"revolutie in persoonlijke tracking-technologie\".\n\nDe verbeteringen komen vooral ten goede aan wat Apple omschrijft als \"intensieve gebruiksscenario's\". Denk aan het volgen van verloren sleutels. Of ex-partners.\n\nDe nieuwe chip lokaliseert objecten tot op drie centimeter nauwkeurig. De vernieuwde speaker waarschuwt wanneer de batterij bijna leeg is. \"Dit voorkomt dat stalkers onverwacht hun doelwit kwijtraken tijdens cruciale momenten\", legt productmanager Sarah Chen uit.\n\nOpvallendste nieuwigheid: Stealth Mode. Hiermee wordt de AirTag tijdelijk onzichtbaar voor detectiesystemen. De eigenaar houdt wel toegang tot locatiegegevens.\n\nApple presenteert dit als een \"privacy-verbetering voor discretiegevoelige situaties\". De functie wordt geactiveerd via nieuwe \"Discretie-instellingen\" in het Zoek Mijn-menu. Het bedrijf kondigt tevens een samenwerking aan met verschillende beveiligingsdiensten voor \"professionele toepassingen\".\n\n\"We zien grote potentie in markten zoals corporate intelligence en ouderwetse spionage\", aldus Chen. Tijdens de eerste testfase bleek dat sommige gebruikers per ongeluk hun eigen Stealth Mode activeerden. Zij zijn sindsdien onvindbaar voor vrienden en familie.\n\nDe AirTag 2 wordt vanaf volgende maand verkocht voor 39 euro per stuk. Apple wijst erop dat ongeautoriseerd gebruik strafbaar kan zijn en adviseert vooral de kleine lettertjes zorgvuldig te lezen.",
+    "topic_mode": "trending",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: tech. title concept: Apple lanceert AirTag 2 met verbeterde stalking-mog",
+      "file_title": "Apple lanceert AirTag 2 met verbeterde stalking-mogelijkheden",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+        "large": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+        "medium": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+        "small": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/01/apple-lanceert-airtag-2-met-verbeterde-stalking-mogelijkheden.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": true,
+    "author": "Byte de Wit",
+    "created_date": "2026-01-30T07:15:48.318Z",
+    "source_url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5UMmNhOExxWTlRRHFNZi1jVk9SWlBYemd0WUxzTlYyVEl6T0ZjWVJRZ1U0Xzk2UF9GZ3FjeE1WNGJabHFjN0RGbHNLNTVJOUZyYUZKaXBUSDZ1VjVwcGc?oc=5",
+    "source_headline": "Dit zijn de nieuwe functies van de AirTag 2 - iCulture",
+    "editor_id": "tech",
+    "editor_name": "Byte de Wit",
+    "editor_role": "Tech & AI",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Direct scherpe eerste zin met humor over stalking",
+      "Ludieke satire op tech en privacy zonder kwetsend te zijn",
+      "Goede opbouw met steeds absurdere details (Stealth Mode, onvindbare gebruikers)",
+      "Korte alinea’s zorgen voor prettig ritme en leesbaarheid",
+      "Droge punchline over kleine lettertjes sluit het stuk sterk af"
+    ],
+    "review_id": "9c1e1da3-10be-4445-9472-f1c24d0bb44a"
+  },
+  {
     "id": "55765761-a942-42c1-b4af-1d01221e00d9",
     "slug": "nieuwe-woningmarktregels-zo-complex-dat-makelaars-cursus-gaan-volgen",
     "title": "Nieuwe woningmarktregels zo complex dat makelaars cursus gaan volgen",
