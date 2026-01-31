@@ -1,5 +1,61 @@
 [
   {
+    "id": "5f8d5921-bcf3-4935-a2a0-8a9cac4000f9",
+    "slug": "kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis",
+    "title": "Kabinet voert maandelijkse verplichte huizenruil in tegen woningcrisis",
+    "subtitle": "Algoritme wijst bewoners nieuwe woning toe op basis van efficiency en spreiding",
+    "category": "binnenland",
+    "content": "Het nieuwe kabinet heeft besloten tot de invoering van verplichte huizenruil om de woningcrisis definitief op te lossen. Vanaf volgend jaar krijgen alle huurders maandelijks een nieuwe woning toegewezen via een algoritme dat optimale benutting van de woningvoorraad garandeert. Het systeem houdt rekening met gezinsgrootte, werklocatie en wijkruimte.\n\nAlleenstaande docent Marieke de Vries ontdekte vorige week dat zij volgens het algoritme perfect past in een studentenflat in Groningen, ondanks dat ze in Amsterdam werkt. \"Het systeem vergist zich niet,\" benadrukt een woordvoerder van Volkshuisvesting. Bewoners krijgen twee weken om hun bezittingen in te pakken voordat ze doorstromen naar hun nieuwe adres.\n\nDe bijbehorende verhuisapp verstuurt pushmeldingen om drie uur 's nachts met herinneringen aan inpakdeadlines. Uit voorzorg zijn bewoners hun meubels massaal gaan voorzien van GPS-trackers. De eerste proefwijken hebben barricades opgeworpen toen bleek dat bewoners gemiddeld 847 euro per maand kwijt zijn aan verhuiskosten.\n\nHet kabinet benadrukt dat eigenaren van koopwoningen voorlopig gevrijwaard blijven van de regeling, \"uit respect voor het eigendomsrecht en logistieke haalbaarheid.\" Oppositiepartijen waarschuwen voor administratieve chaos en de impact op sociale cohesie. Het ministerie wijst erop dat zodra iedereen permanent onderweg is, het begrip 'thuis' vanzelf overbodig wordt.",
+    "topic_mode": "societal_pulse",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: binnenland. title concept: Kabinet voert maandelijkse verplichte huizenr",
+      "file_title": "Kabinet voert maandelijkse verplichte huizenruil in tegen woningcrisis",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+        "large": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+        "medium": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+        "small": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/01/kabinet-voert-maandelijkse-verplichte-huizenruil-in-tegen-woningcrisis.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Nova van der Lijn",
+    "created_date": "2026-01-31T11:11:37.732Z",
+    "source_url": null,
+    "source_headline": "Nieuw kabinet overweegt huizenprijzen te reguleren met verplichte ruilwoningen per wijk",
+    "editor_id": "anchor",
+    "editor_name": "Nova van der Lijn",
+    "editor_role": "Anchorperson",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Eerste zin is direct en absurd grappig",
+      "Ludieke kritiek op bureaucratische systemen en verhuisstress",
+      "Goede opbouw met escalatie naar GPS-trackers en barricades",
+      "Korte alinea’s zorgen voor prettig ritme",
+      "Droge punchline over het verdwijnen van 'thuis' sluit sterk af"
+    ],
+    "review_id": "5f8d5921-bcf3-4935-a2a0-8a9cac4000f9"
+  },
+  {
     "id": "43c07e21-a83a-4a75-8961-1ccf59f1c723",
     "slug": "nederland-introduceert-castingquotum-na-petitie-eva-longoria",
     "title": "Nederland introduceert castingquotum na petitie Eva Longoria",
