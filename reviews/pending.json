@@ -1,5 +1,61 @@
 [
   {
+    "id": "32e80378-6816-4835-ac30-3768cba3dee9",
+    "slug": "gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen",
+    "title": "Gemeenten overwegen verplichte ruildagen om doorstroming te bevorderen",
+    "subtitle": "Bewoners krijgen maandelijks één dag om tijdelijk van woning te wisselen",
+    "category": "binnenland",
+    "content": "Verschillende gemeenten onderzoeken de invoering van maandelijkse 'woningruildagen' waarbij bewoners verplicht één dag hun woning beschikbaar stellen voor tijdelijke bewoning door anderen. Het initiatief moet de doorstroming op de woningmarkt stimuleren. De ruildagen worden gekoppeld aan het OV-chipsysteem.\n\nDeelnemers worden automatisch doorgeleid naar hun tijdelijke adres. Hun reisgedrag tussen woningen wordt geregistreerd voor vervolgonderzoek. \"Als mensen ervaren hoe het is om in een ander huis te wonen, maken ze rationelere keuzes over verhuizen,\" aldus de Amsterdamse wethouder Wonen.\n\nDe gemeente verwacht dat bewoners van sociale huurwoningen sneller doorstromen naar particuliere huur na een proefdag in een krappe studentenkamer. Het kabinet overweegt de maatregel op te nemen in de herziene Woningwet. Gemeenten kunnen dan zelf bepalen welke woningtypen worden ingezet voor de ruildagen. Uitzonderingen gelden voorlopig alleen voor bewoners die aantoonbaar thuiswerken.",
+    "topic_mode": "societal_pulse",
+    "article_type": "short",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: binnenland. title concept: Gemeenten overwegen verplichte ruildagen om d",
+      "file_title": "Gemeenten overwegen verplichte ruildagen om doorstroming te bevorderen",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+        "large": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+        "medium": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+        "small": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/02/gemeenten-overwegen-verplichte-ruildagen-om-doorstroming-te-bevorderen.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": true,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Nova van der Lijn",
+    "created_date": "2026-02-02T17:33:28.908Z",
+    "source_url": null,
+    "source_headline": "Nieuw plan: gemeenten overwegen verplichte ruildagen om huizenmarkt vlot te trekken",
+    "editor_id": "anchor",
+    "editor_name": "Nova van der Lijn",
+    "editor_role": "Anchorperson",
+    "review_status": "needs_human",
+    "review_score": 65,
+    "review_notes": [
+      "Eerste zin mist directe humor of punch",
+      "Artikel blijft te feitelijk, mist scherpe satire",
+      "Ritme is wat vlak, alinea’s zijn te lang en weinig speels",
+      "Escalatie blijft beperkt, geen absurde wendingen",
+      "Punchline is te braaf en mist droge klap"
+    ],
+    "review_id": "32e80378-6816-4835-ac30-3768cba3dee9"
+  },
+  {
     "id": "81147672-e2f3-40aa-8408-882848428f03",
     "slug": "pharming-lanceert-fda-feedback-beta-na-afwijzing-medicijn",
     "title": "Pharming lanceert 'FDA Feedback Beta' na afwijzing medicijn",
