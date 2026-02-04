@@ -1,5 +1,61 @@
 [
   {
+    "id": "1703351f-d06f-4c3f-8dc1-c096212c01b5",
+    "slug": "bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren",
+    "title": "Bondgenoten schakelt consultant in na escalerende ruzie presentatoren",
+    "subtitle": "App waarschuwt medewerkers voor 'verhoogde spanningsindicatoren' in studio",
+    "category": "politiek",
+    "content": "Het SBS6-programma Bondgenoten heeft een externe consultant ingeschakeld na aanhoudende spanningen tussen presentatoren Kaj van der Ree en Patty Brard. De relatiemanagementkosten bedragen inmiddels €47.000 per aflevering, een stijging van €37.000 ten opzichte van het eerste seizoen. De consultant heeft een driefasenplan ontwikkeld met verplichte communicatiesessies en een conflictmeldingshotline.\n\n\"We behandelen elke emotionele uitbarsting als een operationeel risiko,\" aldus een woordvoerder van de productie. Tijdens de eerste testdag registreerde het systeem per ongeluk een discussie tussen catering en regisseur als 'kritiek conflict'. De productie investeerde ook in een app die de stemming van presentatoren real-time monitort via oogcontact-frequentie en onderbreekduur.\n\nMedewerkers ontvangen push-notificaties bij signalen zoals te veel zuchtgeluiden of wanneer Kaj langer dan acht seconden wordt onderbroken tijdens het woord 'eigenlijk'. Door een technische storing meet de app sinds kort ook de stemming van kijkers, wat heeft geleid tot reclames voor relatietherapeuten tussen nieuwsitems. Het management verhoogt het relatiemanagement-budget structureel naar €2,3 miljoen per seizoen.\n\nAdverteerders slikken de 23 procent hogere tarieven voor prime-time slots. \"Ik kijk vooral uit naar de dag dat mijn emoties worden geüpdatet via een softwarepatch,\" reageerde een van de presentatoren. Voor de volledigheid: één minuut stilte in de studio kost de productie nu €1.247,33.",
+    "topic_mode": "trending",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: politiek. title concept: Bondgenoten schakelt consultant in na escaleren",
+      "file_title": "Bondgenoten schakelt consultant in na escalerende ruzie presentatoren",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+        "large": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+        "medium": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+        "small": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/02/bondgenoten-schakelt-consultant-in-na-escalerende-ruzie-presentatoren.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": true,
+    "author": "Inge Rendement",
+    "created_date": "2026-02-04T11:25:05.334Z",
+    "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQeGN6SnVCNlhldGpNTDZiSTFhTjN4T3ZKSWNzNTNPcHBibTNvMDhieHJwQ2VUVS1EUlF1Q0FiYXJSVWJ5eWdQMi00c1QtOXRLekp3V0s2VWdzbUNpV1loVm1NZ2J1S1ZNT21ZdlJBbmNfSkRVM0ZBTGJsSDU3WFpFSWZjOTZ6TU5BQ1ozUmh4R2hOdVdwbHRhYkx2V0tOTWJ4c2c?oc=5",
+    "source_headline": "Heftige ruzie bij Bondgenoten: ‘Ik trek haar heel slecht’ - De Telegraaf",
+    "editor_id": "econ",
+    "editor_name": "Inge Rendement",
+    "editor_role": "Economie & geld",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Direct grappige eerste zin met consultant en hoge kosten",
+      "Ludieke focus op systemen en gedrag, niet op personen",
+      "Goede opbouw met steeds absurdere escalatie",
+      "Droge, scherpe punchline over minuut stilte kosten",
+      "Korte alinea’s zorgen voor prettig ritme"
+    ],
+    "review_id": "1703351f-d06f-4c3f-8dc1-c096212c01b5"
+  },
+  {
     "id": "56ceb9e6-783b-4e9e-b50c-d9559ae2b5b5",
     "slug": "nederland-introduceert-innovatiebeschermingsprotocol-voor-ai-sector",
     "title": "Nederland introduceert 'innovatiebeschermingsprotocol' voor AI-sector",
