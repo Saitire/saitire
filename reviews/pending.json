@@ -1,5 +1,61 @@
 [
   {
+    "id": "e671aca4-1dcc-4afc-bfe5-f6859c195f66",
+    "slug": "nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te",
+    "title": "Nederlandse gemeenten overwegen 'wachtlijst-loterij' om woningzoekenden eerlijk te verdelen",
+    "subtitle": "Nieuwe methode moet wachttijden van gemiddeld 14 jaar terugbrengen naar acceptabele 13,7 jaar",
+    "category": "binnenland",
+    "content": "Gemeenten in de Randstad onderzoeken de invoering van een landelijke wachtlijst-loterij om de verdeling van sociale huurwoningen eerlijker te maken. Het systeem moet een einde maken aan de huidige praktijk waarbij woningzoekenden na vijftien jaar wachten alsnog worden gepasseerd door kandidaten met een halve inschrijfpunt meer. Het huidige puntensysteem kost gemeenten jaarlijks 2,3 miljoen euro aan administratiekosten voor het bijhouden van wachtlijsten.\n\nDoor over te stappen op loten valt de complexiteit van het toekennen van punten voor werkloosheid, echtscheiding en andere life events weg. \"Het nieuwe systeem vereist alleen nog verificatie of kandidaten daadwerkelijk bestaan,\" meldt een woordvoerder van de gemeente Amsterdam. De pilot start in januari met een proefgroep van 50.000 woningzoekenden die vechten om 12 beschikbare woningen.\n\nDeelnemers ontvangen een uniek lotnummer via een beveiligde app. Kandidaten die hun wachtwoord vergeten worden automatisch uitgesloten. \"We verwachten dat de gemiddelde wachttijd hierdoor daalt van 14 naar 13,7 jaar,\" legt projectleider Sandra van der Berg uit.\n\nEen bijwerking is het ontstaan van een zwarte markt voor lotnummers, wat gemeenten nu bestrijden via een speciale taskforce. Gezien de schaarste in andere sectoren overwegen gemeenten uitbreiding naar kinderopvang. Ouders zouden hun geluk kunnen beproeven via een maandelijkse trekking tussen bevruchting en bevalling. De implementatiekosten worden geraamd op 847 euro per niet-toegewezen woning.",
+    "topic_mode": "societal_pulse",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: binnenland. title concept: Nederlandse gemeenten overwegen 'wachtlijst-l",
+      "file_title": "Nederlandse gemeenten overwegen 'wachtlijst-loterij' om woningzoekenden eerlijk te verdelen",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+        "large": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+        "medium": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+        "small": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/02/nederlandse-gemeenten-overwegen-wachtlijst-loterij-om-woningzoekenden-eerlijk-te.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Inge Rendement",
+    "created_date": "2026-02-05T07:32:10.830Z",
+    "source_url": null,
+    "source_headline": "Nederlandse gemeenten overwegen 'wachtlijst-loterij' om woningzoekenden eerlijk te verdelen",
+    "editor_id": "econ",
+    "editor_name": "Inge Rendement",
+    "editor_role": "Economie & geld",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Eerste zin is direct en prikkelend met 'wachtlijst-loterij'",
+      "Ludieke kritiek op bureaucratische systemen zonder kwetsbare groepen te raken",
+      "Goede opbouw met steeds absurdere elementen (zwarte markt, kinderopvang-loterij)",
+      "Korte alinea’s zorgen voor prettig ritme en leesbaarheid",
+      "Droge, onverwachte punchline over implementatiekosten sluit sterk af"
+    ],
+    "review_id": "e671aca4-1dcc-4afc-bfe5-f6859c195f66"
+  },
+  {
     "id": "28493789-b612-4eb4-ab14-5bfb9ab03239",
     "slug": "ziekenhuizen-verhogen-koffieprijzen-om-pauzes-terug-te-dringen",
     "title": "Ziekenhuizen verhogen koffieprijzen om pauzes terug te dringen",
