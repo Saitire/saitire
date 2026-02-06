@@ -1,5 +1,61 @@
 [
   {
+    "id": "e364c30b-9e9c-429b-b826-a921b83d0346",
+    "slug": "nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct",
+    "title": "Nederlandse overheid erkent verloving Halle Berry als cultureel exportproduct",
+    "subtitle": "Staatssecretaris kondigt speciaal fonds aan voor celebrity-verlovingen met Nederlandse connectie",
+    "category": "cultuur",
+    "content": "Het ministerie van Onderwijs, Cultuur en Wetenschap heeft de verloving van actrice Halle Berry officieel erkend als Nederlands cultureel erfgoed. De Oscar-winnares bevestigde deze week haar verloving met musicus Van Hunt, wat volgens staatssecretaris Gunay Uslu \"een unieke kans biedt om onze zachte diplomatie te versterken\". De erkenning valt onder het nieuwe beleidskader 'Hollywood als Culturele Ambassade'.\n\nBerry's keuze om de achternaam van haar Nederlandse ex-echtgenoot te behouden toont volgens beleidsmakers \"de blijvende aantrekkingskracht van onze cultuur, zelfs na een scheiding\". Er komt een speciaal 'Halle Berry-fonds' voor toekomstige verlovingen met Nederlandse connecties. Het fonds biedt subsidies voor romantische dates in Nederland en vergoedt aanvragen voor speciale vergunningen.\n\nNederlandse gemeenten kunnen zich vanaf volgend jaar inschrijven als 'verlovingsbestemming', compleet met gecertificeerde romantische infrastructuur zoals officiële verlovingsbruggen. Het Nationaal Archief voegt Berry's verloving toe aan de collectie iconische Nederlandse liefdesverhalen, naast Máxima en Willem-Alexander. Ambtenaren overwegen nu ook andere privézaken van beroemdheden te archiveren, zoals favoriete stroopwafels en fietsroutes. De eerste subsidieaanvragen worden verwacht zodra de beoordelingscriteria voor romantische authenticiteit definitief zijn vastgesteld.",
+    "topic_mode": "trending",
+    "article_type": "normal",
+    "image": {
+      "provider": "r2 (via replicate)",
+      "query": "- Contemporary editorial photo, neutral grading, natural light, no illustration, no cartoon, no newspaper style. category vibe: cultuur. title concept: Nederlandse overheid erkent verloving Halle Berr",
+      "file_title": "Nederlandse overheid erkent verloving Halle Berry als cultureel exportproduct",
+      "urls": {
+        "original": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+        "large": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+        "medium": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+        "small": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+        "thumb": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp"
+      },
+      "source_page_url": null,
+      "license": {
+        "short": "AI-generated",
+        "url": null
+      },
+      "author": null,
+      "credit": null,
+      "attribution_text": "AI-generated image"
+    },
+    "image_url": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+    "thumbnail_url": "https://img.saitire.nl/articles/2026/02/nederlandse-overheid-erkent-verloving-halle-berry-als-cultureel-exportproduct.webp",
+    "image_source": null,
+    "image_license": "AI-generated",
+    "is_featured": false,
+    "is_short_news": false,
+    "featured_at": null,
+    "featured_until": null,
+    "featured_candidate": false,
+    "author": "Fenna Foyer",
+    "created_date": "2026-02-06T17:37:00.920Z",
+    "source_url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPcEc1X2RtS1pzMXB3SzBCdWR1VlQ0NkFJNGZLem5KMGtLZHg0OHkxRVlxWFcwWGdoVGI3emFGdW00Znh1THFUODFqZUx2eFVGX3QzdEpveE9nbjRuX3RaRW1UNjdRd1NyZjlNV0Frb2hYVEFwVGdWSU1yWDZ5Z1NGSkNrWmowajREc1hwQk9CYTVpUUprRzNQODFkYVFUMXpEZGc5ZGI3NVNjVkllbklWaG9vQkk?oc=5",
+    "source_headline": "Halle Berry bevestigt verloving met Van Hunt: 'Natuurlijk heb ik ja gezegd' - NU",
+    "editor_id": "culture",
+    "editor_name": "Fenna Foyer",
+    "editor_role": "Cultuur",
+    "review_status": "needs_human",
+    "review_score": 82,
+    "review_notes": [
+      "Direct grappige eerste zin met absurditeit over cultureel erfgoed",
+      "Ludieke satire op bureaucratie en culturele diplomatie",
+      "Goede opbouw met escalatie naar absurde subsidies en verlovingsbruggen",
+      "Ritme is prettig met korte alinea’s en geen opsommingen",
+      "Droge punchline over stroopwafels en fietsroutes sluit sterk af"
+    ],
+    "review_id": "e364c30b-9e9c-429b-b826-a921b83d0346"
+  },
+  {
     "id": "56a115a1-9e10-4087-bf92-e641d6bab935",
     "slug": "kabinet-introduceert-tentbeleid-om-woningtekort-structureel-op-te-lossen",
     "title": "Kabinet introduceert 'tentbeleid' om woningtekort structureel op te lossen",
